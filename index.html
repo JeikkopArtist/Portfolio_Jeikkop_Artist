@@ -34,13 +34,13 @@
       line-height: 1.6;
     }
     
-    /* HEADER - Modificado para color original y logo más grande */
+    /* HEADER - Manteniendo imagen de fondo */
     header {
       width: 100%;
-      height: 120px; /* Aumentado para logo más grande */
-      background: var(--primary-color); /* Color sólido en lugar de imagen */
+      height: 100px;
+      background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
       color: var(--primary-color);
-      padding: 10px 40px;
+      padding: 10px 40px; /* Reducido padding para dar más espacio al logo */
       position: fixed;
       top: 0;
       left: 0;
@@ -48,7 +48,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
     
     .logo-container {
@@ -60,12 +59,12 @@
     }
     
     .logo {
-      height: 100px; /* Logo mucho más grande */
+      height: 90px; /* Logo MÁS GRANDE (era 80px) */
       width: auto;
       max-width: none; /* Quitamos limitación */
       object-fit: contain;
       transition: transform 0.3s ease;
-      filter: brightness(1.2); /* Mejora visibilidad */
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Mejor visibilidad sobre fondo */
     }
     
     .logo:hover {
@@ -93,6 +92,7 @@
       padding: 8px 15px;
       border-radius: 4px;
       font-size: 0.95rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     
     nav ul li a:hover {
@@ -105,7 +105,7 @@
     section {
       width: 100%;
       min-height: 100vh;
-      padding: 160px 60px 60px; /* Aumentado padding-top por header más alto */
+      padding: 150px 60px 60px;
       box-sizing: border-box;
     }
     
@@ -129,23 +129,24 @@
     
     #personal-info { 
       background: var(--bg-white); 
+      padding-bottom: 40px; /* REDUCIDO el padding inferior */
     }
     
     .personal-container {
       display: flex;
-      align-items: center;
+      align-items: flex-start; /* Cambiado de center a flex-start */
       gap: 60px;
+      min-height: 300px; /* Altura mínima para el contenedor */
     }
     
     .personal-photo {
       width: 300px;
-      height: 300px;
+      height: 380px; /* AUMENTADA la altura para mostrar más foto */
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      /* Recortamos la foto para mostrar más alto */
-      object-position: center 25%; /* Ajusta para mostrar más parte superior */
+      object-position: center top; /* Muestra la parte superior de la foto */
     }
     
     .personal-content h3 {
@@ -162,6 +163,7 @@
     #lightbox-gallery { 
       background: #e9e9e9;
       min-height: auto;
+      padding-top: 40px; /* AÑADIDO padding-top igual que abajo */
       padding-bottom: 40px;
     }
     
@@ -170,13 +172,13 @@
       padding-top: 50px;
     }
     
-    /* SOFTWARE GRID - Añadido margen superior para balance */
+    /* SOFTWARE GRID */
     .softwares-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 30px;
       margin-top: 40px;
-      margin-bottom: 40px; /* Añadido para balance visual */
+      margin-bottom: 40px; /* Mantenemos el mismo margin que ya tenía */
       text-align: center;
     }
     
@@ -207,7 +209,7 @@
       font-size: 1.1rem;
     }
     
-    /* LIGHTBOX - Modificado para videos menos estrechos */
+    /* LIGHTBOX - MODIFICADO para videos más anchos */
     .custom-lightbox {
       display: none;
       position: fixed;
@@ -250,8 +252,8 @@
     
     .carousel-container {
       position: relative;
-      width: 90%; /* Aumentado para videos más anchos */
-      max-width: 1200px; /* Aumentado máximo */
+      width: 95%; /* AUMENTADO al 95% (era 80%) */
+      max-width: 1400px; /* AUMENTADO máximo */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -270,16 +272,16 @@
     
     .carousel-item iframe {
       width: 100%;
-      height: 500px;
+      height: 550px; /* AUMENTADA la altura */
       border: none;
-      border-radius: 8px; /* Bordes redondeados */
+      border-radius: 8px;
     }
     
     .carousel-item img {
       width: 100%;
-      max-height: 600px;
+      max-height: 650px; /* AUMENTADA la altura máxima */
       object-fit: contain;
-      border-radius: 8px; /* Bordes redondeados */
+      border-radius: 8px;
     }
     
     @keyframes fadeIn {
@@ -310,7 +312,7 @@
       transform: translateY(-2px);
     }
     
-    /* SKIPPR CAROUSEL - MODIFICADO PARA MENOS BANDA NEGRA Y FLECHAS */
+    /* SKIPPR CAROUSEL - COMPLETAMENTE MODIFICADO CON FLECHAS */
     #bigSkippr {
       width: 100%;
       height: 600px;
@@ -331,10 +333,10 @@
       background: transparent;
     }
     
-    /* CONTENEDOR PARA VIDEO MÁS ANCHO - Modificado */
+    /* CONTENEDOR PARA VIDEO */
     .video-container {
-      width: 95%; /* Aumentado para menos banda negra */
-      max-width: 1400px; /* Más ancho */
+      width: 90%;
+      max-width: 1200px;
       height: 0;
       padding-bottom: 56.25%; /* 16:9 aspect ratio */
       position: relative;
@@ -353,33 +355,33 @@
       border: none;
     }
     
-    /* CONTROLES DEL CARRUSEL SKIPPR - PERSONALIZADOS CON FLECHAS */
+    /* OCULTAMOS COMPLETAMENTE LOS PUNTOS/NAVEGACIÓN POR DEFECTO */
     #bigSkippr .skippr-nav-container {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      z-index: 10;
-    }
-    
-    /* OCULTAMOS LOS PUNTOS/CIRCULOS */
-    #bigSkippr .skippr-nav-element {
       display: none !important;
     }
     
     /* FLECHAS PERSONALIZADAS - REEMPLAZANDO LOS CIRCULOS */
-    #bigSkippr .skippr-arrow {
+    .custom-skippr-arrows {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .custom-skippr-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       color: white;
-      font-size: 50px;
+      font-size: 40px;
       cursor: pointer;
-      z-index: 10;
-      background: rgba(0,0,0,0.6);
-      width: 70px;
-      height: 70px;
+      pointer-events: auto;
+      background: rgba(0,0,0,0.5);
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -389,18 +391,18 @@
       font-weight: bold;
     }
     
-    #bigSkippr .skippr-arrow:hover {
-      background: rgba(0,0,0,0.9);
-      transform: translateY(-50%) scale(1.15);
-      border-color: var(--secondary-color);
+    .custom-skippr-arrow:hover {
+      background: rgba(0,0,0,0.8);
+      transform: translateY(-50%) scale(1.3); /* CRECE con hover */
+      border-color: white;
     }
     
-    #bigSkippr .skippr-arrow.prev {
-      left: 30px;
+    .custom-skippr-arrow.prev {
+      left: 20px;
     }
     
-    #bigSkippr .skippr-arrow.next {
-      right: 30px;
+    .custom-skippr-arrow.next {
+      right: 20px;
     }
     
     /* CONTACT FORM */
@@ -464,11 +466,11 @@
       box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
     
-    /* FOOTER - Color sólido como el header */
+    /* FOOTER - Manteniendo imagen de fondo */
     footer {
-      background: var(--primary-color); /* Mismo color que header */
+      background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
       color: white;
-      padding: 50px 40px;
+      padding: 40px;
       text-align: center;
     }
     
@@ -476,6 +478,7 @@
       font-size: 1.1rem;
       margin-bottom: 25px;
       font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     
     .social-icons {
@@ -488,26 +491,26 @@
     .social-icons a {
       text-decoration: none;
       transition: all 0.3s ease;
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.2);
     }
     
     .social-icons a:hover {
-      transform: translateY(-5px) scale(1.1);
-      background: rgba(255,255,255,0.25);
-      border-color: var(--secondary-color);
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.2);
     }
     
     .social-icons i {
-      font-size: 28px;
+      font-size: 24px;
       color: white;
       transition: color 0.3s ease;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     
     .social-icons a:hover i {
@@ -517,7 +520,7 @@
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       .logo {
-        height: 90px;
+        height: 80px;
       }
       
       nav ul {
@@ -525,22 +528,25 @@
       }
       
       .video-container {
-        width: 92%;
+        width: 95%;
+      }
+      
+      .carousel-container {
+        width: 90%;
       }
     }
     
     @media (max-width: 992px) {
       header {
         padding: 15px 30px;
-        height: 110px;
       }
       
       .logo {
-        height: 80px;
+        height: 70px;
       }
       
       section {
-        padding: 150px 40px 40px;
+        padding: 140px 40px 40px;
       }
       
       .personal-container {
@@ -551,28 +557,28 @@
       
       .personal-photo {
         width: 280px;
-        height: 280px;
+        height: 350px; /* Mantenemos altura proporcional */
       }
       
       #bigSkippr {
         height: 500px;
       }
       
-      #bigSkippr .skippr-arrow {
-        width: 60px;
-        height: 60px;
-        font-size: 40px;
+      .custom-skippr-arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 35px;
       }
     }
     
     @media (max-width: 780px) {
       header {
-        height: 100px;
+        height: 80px;
         padding: 10px 20px;
       }
       
       .logo {
-        height: 70px;
+        height: 60px;
       }
       
       nav ul {
@@ -594,7 +600,7 @@
       }
       
       .video-container {
-        width: 96%;
+        width: 98%;
       }
       
       .carousel-container {
@@ -605,22 +611,26 @@
         height: 400px;
       }
       
+      .carousel-item img {
+        max-height: 500px;
+      }
+      
       .contact-container {
         padding: 30px;
       }
       
-      #bigSkippr .skippr-arrow {
-        width: 50px;
-        height: 50px;
-        font-size: 35px;
+      .custom-skippr-arrow {
+        width: 45px;
+        height: 45px;
+        font-size: 30px;
       }
       
-      #bigSkippr .skippr-arrow.prev {
-        left: 15px;
+      .custom-skippr-arrow.prev {
+        left: 10px;
       }
       
-      #bigSkippr .skippr-arrow.next {
-        right: 15px;
+      .custom-skippr-arrow.next {
+        right: 10px;
       }
     }
     
@@ -635,7 +645,6 @@
       .logo-container {
         justify-content: center;
         width: 100%;
-        height: auto;
       }
       
       .logo {
@@ -668,8 +677,12 @@
       }
       
       section {
-        padding: 170px 20px 30px; /* Aumentado por header más alto */
+        padding: 150px 20px 30px;
         min-height: auto;
+      }
+      
+      #personal-info {
+        padding-bottom: 30px;
       }
       
       section h2 {
@@ -678,8 +691,8 @@
       }
       
       .personal-photo {
-        width: 220px;
-        height: 220px;
+        width: 250px;
+        height: 320px;
       }
       
       .personal-content h3 {
@@ -695,18 +708,10 @@
         height: 300px;
       }
       
-      #bigSkippr .skippr-arrow {
+      .custom-skippr-arrow {
         width: 40px;
         height: 40px;
         font-size: 25px;
-      }
-      
-      #bigSkippr .skippr-arrow.prev {
-        left: 10px;
-      }
-      
-      #bigSkippr .skippr-arrow.next {
-        right: 10px;
       }
       
       .carousel-container {
@@ -715,6 +720,10 @@
       
       .carousel-item iframe {
         height: 300px;
+      }
+      
+      .carousel-item img {
+        max-height: 400px;
       }
       
       .carousel-controls {
@@ -736,7 +745,7 @@
       }
       
       footer {
-        padding: 40px 20px;
+        padding: 30px 20px;
       }
       
       .social-icons {
@@ -744,12 +753,12 @@
       }
       
       .social-icons a {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
       }
       
       .social-icons i {
-        font-size: 22px;
+        font-size: 20px;
       }
     }
   </style>
@@ -887,6 +896,11 @@
         <iframe src="https://www.youtube.com/embed/WgQNm5tODgw" title="chaletMytto" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
+  </div>
+  <!-- FLECHAS PERSONALIZADAS PARA SKIPPR -->
+  <div class="custom-skippr-arrows">
+    <div class="custom-skippr-arrow prev">‹</div>
+    <div class="custom-skippr-arrow next">›</div>
   </div>
 </section>
 
@@ -1034,7 +1048,7 @@ $(document).ready(function() {
     }
   });
   
-  // Inicializar Skippr - CONFIGURACIÓN MEJORADA
+  // Inicializar Skippr - CONFIGURACIÓN SIMPLIFICADA
   if ($("#bigSkippr").length) {
     $("#bigSkippr").skippr({
       transition: 'fade',
@@ -1042,11 +1056,26 @@ $(document).ready(function() {
       autoPlay: true,
       autoPlayDuration: 5000,
       navType: 'bubble',
-      arrows: true,
+      arrows: false, // Desactivamos las flechas por defecto
       arrowsAutoHide: false
     });
     
-    // Forzar redibujado para asegurar que se vea
+    // Control personalizado de flechas para Skippr
+    let skipprInstance = $("#bigSkippr").data('skippr');
+    
+    $(".custom-skippr-arrow.next").on("click", function() {
+      if (skipprInstance) {
+        skipprInstance.next();
+      }
+    });
+    
+    $(".custom-skippr-arrow.prev").on("click", function() {
+      if (skipprInstance) {
+        skipprInstance.prev();
+      }
+    });
+    
+    // Forzar redibujado
     setTimeout(function() {
       $(window).trigger('resize');
     }, 100);
@@ -1058,14 +1087,14 @@ $(document).ready(function() {
     const target = $(this.getAttribute('href'));
     if (target.length) {
       $('html, body').stop().animate({
-        scrollTop: target.offset().top - 120 // Ajustado por header más alto
+        scrollTop: target.offset().top - 100
       }, 600);
     }
   });
   
   // Añadir clase activa al menú según scroll
   $(window).on('scroll', function() {
-    const scrollPos = $(window).scrollTop() + 140;
+    const scrollPos = $(window).scrollTop() + 120;
     
     $('nav ul li a').each(function() {
       const currLink = $(this);
