@@ -40,7 +40,7 @@
       height: 100px;
       background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
       color: var(--primary-color);
-      padding: 20px;
+      padding: 20px 40px;
       position: fixed;
       top: 0;
       left: 0;
@@ -50,19 +50,34 @@
       align-items: center;
     }
     
+    .logo-container {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+    }
+    
     .logo {
-      height: 305px;
-      width: 450px;
-      padding-left: 650px;
-      padding-bottom: 10px;
+      height: 80px;
+      width: auto;
+      max-width: 200px;
       object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
     }
     
     nav ul {
       list-style: none;
       display: flex;
-      gap: 20px;
-      margin-right: 60px;
+      gap: 25px;
       padding: 0;
     }
     
@@ -70,14 +85,16 @@
       color: white;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s ease;
-      padding: 8px 12px;
+      transition: all 0.3s ease;
+      padding: 8px 15px;
       border-radius: 4px;
+      font-size: 0.95rem;
     }
     
     nav ul li a:hover {
       color: var(--secondary-color);
       background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
     }
     
     /* SECTIONS */
@@ -113,20 +130,27 @@
     .personal-container {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 60px;
     }
     
     .personal-photo {
       width: 300px;
+      height: 300px;
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
     .personal-content h3 {
       font-size: 1.8rem;
       margin-bottom: 20px;
       color: var(--primary-color);
+    }
+    
+    .personal-content p {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
     }
     
     #lightbox-gallery { 
@@ -143,7 +167,7 @@
     /* SOFTWARE GRID */
     .softwares-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 30px;
       margin-top: 40px;
       text-align: center;
@@ -151,22 +175,29 @@
     
     .software-item {
       cursor: pointer;
-      padding: 20px;
+      padding: 25px 20px;
       background: var(--bg-white);
-      border-radius: 8px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     }
     
     .software-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
     
     .software-item img {
       width: 80px;
       height: 80px;
       object-fit: contain;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .software-item p {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 1.1rem;
     }
     
     /* LIGHTBOX */
@@ -177,7 +208,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.97);
       justify-content: center;
       align-items: center;
       flex-direction: column;
@@ -193,19 +224,27 @@
       font-size: 40px;
       cursor: pointer;
       position: absolute;
-      top: 20px;
+      top: 30px;
       right: 40px;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+      z-index: 2001;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
     
     .lightbox-close:hover {
       transform: scale(1.1);
+      background: rgba(255,255,255,0.1);
     }
     
     .carousel-container {
       position: relative;
-      width: 70%;
-      max-width: 900px;
+      width: 80%;
+      max-width: 1000px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -222,53 +261,139 @@
       animation: fadeIn 0.5s ease;
     }
     
+    .carousel-item iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+    
+    .carousel-item img {
+      width: 100%;
+      max-height: 600px;
+      object-fit: contain;
+    }
+    
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
     
     .carousel-controls {
-      margin-top: 20px;
+      margin-top: 30px;
       display: flex;
       gap: 40px;
     }
     
     .carousel-controls button {
-      padding: 10px 20px;
+      padding: 12px 25px;
       font-size: 18px;
       cursor: pointer;
       background: var(--bg-white);
       border: none;
-      border-radius: 4px;
-      transition: background 0.3s ease;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      min-width: 120px;
     }
     
     .carousel-controls button:hover {
       background: var(--secondary-color);
+      transform: translateY(-2px);
     }
     
-    /* SKIPPR CAROUSEL */
+    /* SKIPPR CAROUSEL - CORREGIDO COMPLETAMENTE */
     #bigSkippr {
       width: 100%;
-      height: 500px;
+      height: 600px;
+      position: relative;
+      overflow: hidden;
+      background: #000;
     }
     
     #bigSkippr .slide {
       width: 100%;
       height: 100%;
-      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex !important;
       justify-content: center;
       align-items: center;
+    }
+    
+    /* CONTENEDOR PARA MANTENER PROPORCIÓN 16:9 */
+    .video-container {
+      width: 90%;
+      max-width: 1200px;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+      position: relative;
       background: #000;
     }
     
-    #bigSkippr iframe,
-    #bigSkippr video {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: cover;
+    #bigSkippr .slide iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+    }
+    
+    /* Controles del carrusel Skippr - Personalizados */
+    #bigSkippr .skippr-nav-container {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+    }
+    
+    #bigSkippr .skippr-nav-element {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    #bigSkippr .skippr-nav-element.active {
+      background: var(--secondary-color);
+    }
+    
+    #bigSkippr .skippr-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 10;
+      background: rgba(0,0,0,0.5);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    #bigSkippr .skippr-arrow:hover {
+      background: rgba(0,0,0,0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    #bigSkippr .skippr-arrow.prev {
+      left: 20px;
+    }
+    
+    #bigSkippr .skippr-arrow.next {
+      right: 20px;
     }
     
     /* CONTACT FORM */
@@ -324,11 +449,12 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
     }
     
     .submit-btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
     
     /* FOOTER */
@@ -339,20 +465,34 @@
       text-align: center;
     }
     
+    footer p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+    
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
       margin-top: 20px;
     }
     
     .social-icons a {
       text-decoration: none;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
     }
     
     .social-icons a:hover {
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.2);
     }
     
     .social-icons i {
@@ -361,73 +501,92 @@
       transition: color 0.3s ease;
     }
     
-    .social-icons i:hover {
+    .social-icons a:hover i {
       color: var(--secondary-color);
     }
     
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       .logo {
-        padding-left: 400px;
+        height: 70px;
+      }
+      
+      nav ul {
+        gap: 15px;
+      }
+      
+      .video-container {
+        width: 95%;
       }
     }
     
     @media (max-width: 992px) {
+      header {
+        padding: 15px 30px;
+      }
+      
       .logo {
-        padding-left: 200px;
-        height: 250px;
-        width: 350px;
+        height: 60px;
       }
       
       section {
         padding: 140px 40px 40px;
       }
-    }
-    
-    @media (max-width: 780px) {
-      header {
-        height: 90px;
-        padding: 15px 30px;
-      }
-      
-      .logo {
-        height: 180px;
-        width: 250px;
-        padding-left: 0;
-        padding-bottom: 5px;
-      }
-      
-      nav ul {
-        gap: 12px;
-        margin-right: 20px;
-      }
-      
-      nav ul li a {
-        font-size: 0.85rem;
-        padding: 6px 12px;
-      }
       
       .personal-container {
         flex-direction: column;
         text-align: center;
-        gap: 30px;
+        gap: 40px;
       }
       
       .personal-photo {
         width: 250px;
+        height: 250px;
+      }
+      
+      #bigSkippr {
+        height: 500px;
+      }
+    }
+    
+    @media (max-width: 780px) {
+      header {
+        height: 80px;
+        padding: 10px 20px;
+      }
+      
+      .logo {
+        height: 50px;
+      }
+      
+      nav ul {
+        gap: 10px;
+      }
+      
+      nav ul li a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
       }
       
       .softwares-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
+        gap: 20px;
       }
       
       #bigSkippr {
         height: 400px;
       }
       
+      .video-container {
+        width: 98%;
+      }
+      
       .carousel-container {
-        width: 85%;
+        width: 90%;
+      }
+      
+      .carousel-item iframe {
+        height: 400px;
       }
       
       .contact-container {
@@ -438,51 +597,47 @@
     @media (max-width: 480px) {
       header {
         height: auto;
-        padding: 10px 15px;
+        padding: 15px;
         flex-direction: column;
+        gap: 15px;
+      }
+      
+      .logo-container {
         justify-content: center;
-        align-items: center;
+        width: 100%;
       }
       
       .logo {
-        height: 80px;
-        width: 120px;
-        padding-left: 0;
-        padding-bottom: 0;
-        margin-bottom: 15px;
+        height: 60px;
+        margin: 0;
       }
       
       nav {
         width: 100%;
+        justify-content: center;
       }
       
       nav ul {
-        display: flex;
-        flex-direction: row;
         flex-wrap: wrap;
         gap: 8px;
-        margin-right: 0;
-        padding: 0;
         justify-content: center;
       }
       
       nav ul li {
-        flex: 1;
-        min-width: 45%;
+        flex: 0 0 calc(50% - 8px);
         text-align: center;
       }
       
       nav ul li a {
         display: block;
-        padding: 10px 8px;
+        padding: 10px;
         font-size: 0.8rem;
         background: rgba(255,255,255,0.1);
-        border-radius: 6px;
         border: 1px solid rgba(255,255,255,0.2);
       }
       
       section {
-        padding: 180px 20px 30px;
+        padding: 150px 20px 30px;
         min-height: auto;
       }
       
@@ -491,48 +646,54 @@
         margin-bottom: 30px;
       }
       
-      .personal-container {
-        gap: 20px;
-      }
-      
       .personal-photo {
         width: 200px;
+        height: 200px;
       }
       
       .personal-content h3 {
-        font-size: 1.4rem;
-      }
-      
-      .personal-content p {
-        font-size: 0.95rem;
-        text-align: left;
+        font-size: 1.5rem;
       }
       
       .softwares-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
-        margin-top: 30px;
-      }
-      
-      .software-item {
-        padding: 20px 15px;
+        gap: 15px;
       }
       
       #bigSkippr {
         height: 300px;
       }
       
+      #bigSkippr .skippr-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+      }
+      
+      #bigSkippr .skippr-arrow.prev {
+        left: 10px;
+      }
+      
+      #bigSkippr .skippr-arrow.next {
+        right: 10px;
+      }
+      
       .carousel-container {
-        width: 90%;
+        width: 95%;
+      }
+      
+      .carousel-item iframe {
+        height: 300px;
       }
       
       .carousel-controls {
-        gap: 20px;
+        gap: 15px;
       }
       
       .carousel-controls button {
-        padding: 8px 15px;
+        padding: 10px 15px;
         font-size: 16px;
+        min-width: 100px;
       }
       
       #contacto {
@@ -540,20 +701,20 @@
       }
       
       .contact-container {
-        padding: 25px;
+        padding: 25px 20px;
       }
       
       footer {
         padding: 30px 20px;
       }
       
-      footer p {
-        font-size: 1rem;
-        margin-bottom: 15px;
-      }
-      
       .social-icons {
         gap: 15px;
+      }
+      
+      .social-icons a {
+        width: 45px;
+        height: 45px;
       }
       
       .social-icons i {
@@ -565,7 +726,9 @@
 <body>
 
 <header>
-  <img class="logo" src="Imagenes/Logo/Logo.png" alt="Logo Jesús Jiménez">
+  <div class="logo-container">
+    <img class="logo" src="Imagenes/Logo/Logo.png" alt="Logo Jesús Jiménez">
+  </div>
   <nav>
     <ul>
       <li><a href="#personal-info">Sobre mí</a></li>
@@ -615,15 +778,15 @@
   <div id="lb-blender" class="custom-lightbox">
     <span class="lightbox-close">×</span>
     <div class="carousel-container">
-      <iframe class="carousel-item" src="https://www.youtube.com/embed/KmiIL6iYKV4" title="Secuencia Arcane" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="carousel-item active" src="https://www.youtube.com/embed/KmiIL6iYKV4" title="Secuencia Arcane" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <iframe class="carousel-item" src="https://www.youtube.com/embed/QujwbdPqZKY" title="Lipsyng Arcane" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <img class="carousel-item" src="Imagenes/Material/Blender/Jiménez_Jesús_VistaGeneral.png" alt="Vista General">
       <iframe class="carousel-item" src="https://www.youtube.com/embed/hQ1WWAZ27ZA" title="Render Lupa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <iframe class="carousel-item active" src="https://www.youtube.com/embed/Fbu4vj-MmoY" title="Modelo Zeff One Piece" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/Fbu4vj-MmoY" title="Modelo Zeff One Piece" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="carousel-controls">
-      <button class="prev">←</button>
-      <button class="next">→</button>
+      <button class="prev">← Anterior</button>
+      <button class="next">Siguiente →</button>
     </div>
   </div>
 
@@ -636,8 +799,8 @@
       <iframe class="carousel-item" src="https://www.youtube.com/embed/kjpahZbstLw" title="Música Montaje Definitivo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="carousel-controls">
-      <button class="prev">←</button>
-      <button class="next">→</button>
+      <button class="prev">← Anterior</button>
+      <button class="next">Siguiente →</button>
     </div>
   </div>
 
@@ -650,22 +813,22 @@
       <iframe class="carousel-item" src="https://www.youtube.com/embed/S-759yVjo9o" title="Storyboard Spiderman" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="carousel-controls">
-      <button class="prev">←</button>
-      <button class="next">→</button>
+      <button class="prev">← Anterior</button>
+      <button class="next">Siguiente →</button>
     </div>
   </div>
 
   <div id="lb-after" class="custom-lightbox">
     <span class="lightbox-close">×</span>
     <div class="carousel-container">
-      <img class="carousel-item" src="Imagenes/Material/Personajes/Jiménez_Jesús_Emociones.png" alt="Emociones">
+      <img class="carousel-item active" src="Imagenes/Material/Personajes/Jiménez_Jesús_Emociones.png" alt="Emociones">
       <img class="carousel-item" src="Imagenes/Material/Personajes/Jiménez_Jesús_ColoresPersonaje.png" alt="Colores Personaje">
       <iframe class="carousel-item" src="https://www.youtube.com/embed/C0YCF4OItYc" title="360 Arcane" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <img class="carousel-item active" src="Imagenes/Material/Personajes/Jiménez_Jesús_PersonajeRigFoto.png" alt="Personaje Rig">
+      <img class="carousel-item" src="Imagenes/Material/Personajes/Jiménez_Jesús_PersonajeRigFoto.png" alt="Personaje Rig">
     </div>
     <div class="carousel-controls">
-      <button class="prev">←</button>
-      <button class="next">→</button>
+      <button class="prev">← Anterior</button>
+      <button class="next">Siguiente →</button>
     </div>
   </div>
 </section>
@@ -673,17 +836,25 @@
 <section id="mistrabajos">
   <h2>Carrusel de Trabajos</h2>
   <div id="bigSkippr">
-    <div>
-      <iframe src="https://www.youtube.com/embed/OA-nadV1eHU" title="Pedorreta EnEfecto3D" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="slide">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/OA-nadV1eHU" title="Pedorreta EnEfecto3D" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
-    <div>
-      <iframe src="https://www.youtube.com/embed/77LeBLk2HYo" title="LamaparaPixar Presentación" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="slide">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/77LeBLk2HYo" title="LamaparaPixar Presentación" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
-    <div>
-      <iframe src="https://www.youtube.com/embed/bTCJSUtdzkM" title="Casa Modelada" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="slide">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/bTCJSUtdzkM" title="Casa Modelada" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
-    <div>
-      <iframe src="https://www.youtube.com/embed/WgQNm5tODgw" title="chaletMytto" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="slide">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/WgQNm5tODgw" title="chaletMytto" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 </section>
@@ -794,8 +965,9 @@ $(document).ready(function() {
     const currentIndex = items.index(activeItem);
     
     // Pausar video actual
-    activeItem.find("video").each(function() {
-      this.pause();
+    activeItem.find("iframe").each(function() {
+      const src = $(this).attr('src');
+      $(this).attr('src', src); // Reiniciar el iframe para pausar
     });
     
     // Calcular nuevo índice
@@ -831,14 +1003,22 @@ $(document).ready(function() {
     }
   });
   
-  // Inicializar Skippr
+  // Inicializar Skippr - CONFIGURACIÓN MEJORADA
   if ($("#bigSkippr").length) {
     $("#bigSkippr").skippr({
       transition: 'fade',
-      speed: 1000,
+      speed: 800,
       autoPlay: true,
       autoPlayDuration: 5000,
+      navType: 'bubble',
+      arrows: true,
+      arrowsAutoHide: false
     });
+    
+    // Forzar redibujado para asegurar que se vea
+    setTimeout(function() {
+      $(window).trigger('resize');
+    }, 100);
   }
   
   // Smooth scroll para enlaces internos
@@ -846,10 +1026,27 @@ $(document).ready(function() {
     e.preventDefault();
     const target = $(this.getAttribute('href'));
     if (target.length) {
-      $('html, body').animate({
+      $('html, body').stop().animate({
         scrollTop: target.offset().top - 100
       }, 600);
     }
+  });
+  
+  // Añadir clase activa al menú según scroll
+  $(window).on('scroll', function() {
+    const scrollPos = $(window).scrollTop() + 120;
+    
+    $('nav ul li a').each(function() {
+      const currLink = $(this);
+      const refElement = $(currLink.attr("href"));
+      
+      if (refElement.length && 
+          refElement.position().top <= scrollPos && 
+          refElement.position().top + refElement.height() > scrollPos) {
+        $('nav ul li a').removeClass("active");
+        currLink.addClass("active");
+      }
+    });
   });
 });
 </script>
