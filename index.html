@@ -34,13 +34,13 @@
       line-height: 1.6;
     }
     
-    /* HEADER */
+    /* HEADER - Modificado para color original y logo más grande */
     header {
       width: 100%;
-      height: 100px;
-      background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
+      height: 120px; /* Aumentado para logo más grande */
+      background: var(--primary-color); /* Color sólido en lugar de imagen */
       color: var(--primary-color);
-      padding: 20px 40px;
+      padding: 10px 40px;
       position: fixed;
       top: 0;
       left: 0;
@@ -48,20 +48,24 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
     
     .logo-container {
       flex: 1;
       display: flex;
       justify-content: flex-start;
+      align-items: center;
+      height: 100%;
     }
     
     .logo {
-      height: 80px;
+      height: 100px; /* Logo mucho más grande */
       width: auto;
-      max-width: 200px;
+      max-width: none; /* Quitamos limitación */
       object-fit: contain;
       transition: transform 0.3s ease;
+      filter: brightness(1.2); /* Mejora visibilidad */
     }
     
     .logo:hover {
@@ -101,7 +105,7 @@
     section {
       width: 100%;
       min-height: 100vh;
-      padding: 150px 60px 60px;
+      padding: 160px 60px 60px; /* Aumentado padding-top por header más alto */
       box-sizing: border-box;
     }
     
@@ -140,6 +144,8 @@
       object-fit: cover;
       flex-shrink: 0;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      /* Recortamos la foto para mostrar más alto */
+      object-position: center 25%; /* Ajusta para mostrar más parte superior */
     }
     
     .personal-content h3 {
@@ -164,12 +170,13 @@
       padding-top: 50px;
     }
     
-    /* SOFTWARE GRID */
+    /* SOFTWARE GRID - Añadido margen superior para balance */
     .softwares-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 30px;
       margin-top: 40px;
+      margin-bottom: 40px; /* Añadido para balance visual */
       text-align: center;
     }
     
@@ -200,7 +207,7 @@
       font-size: 1.1rem;
     }
     
-    /* LIGHTBOX */
+    /* LIGHTBOX - Modificado para videos menos estrechos */
     .custom-lightbox {
       display: none;
       position: fixed;
@@ -243,8 +250,8 @@
     
     .carousel-container {
       position: relative;
-      width: 80%;
-      max-width: 1000px;
+      width: 90%; /* Aumentado para videos más anchos */
+      max-width: 1200px; /* Aumentado máximo */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -265,12 +272,14 @@
       width: 100%;
       height: 500px;
       border: none;
+      border-radius: 8px; /* Bordes redondeados */
     }
     
     .carousel-item img {
       width: 100%;
       max-height: 600px;
       object-fit: contain;
+      border-radius: 8px; /* Bordes redondeados */
     }
     
     @keyframes fadeIn {
@@ -301,7 +310,7 @@
       transform: translateY(-2px);
     }
     
-    /* SKIPPR CAROUSEL - CORREGIDO COMPLETAMENTE */
+    /* SKIPPR CAROUSEL - MODIFICADO PARA MENOS BANDA NEGRA Y FLECHAS */
     #bigSkippr {
       width: 100%;
       height: 600px;
@@ -319,16 +328,20 @@
       display: flex !important;
       justify-content: center;
       align-items: center;
+      background: transparent;
     }
     
-    /* CONTENEDOR PARA MANTENER PROPORCIÓN 16:9 */
+    /* CONTENEDOR PARA VIDEO MÁS ANCHO - Modificado */
     .video-container {
-      width: 90%;
-      max-width: 1200px;
+      width: 95%; /* Aumentado para menos banda negra */
+      max-width: 1400px; /* Más ancho */
       height: 0;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
       position: relative;
       background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     
     #bigSkippr .slide iframe {
@@ -340,7 +353,7 @@
       border: none;
     }
     
-    /* Controles del carrusel Skippr - Personalizados */
+    /* CONTROLES DEL CARRUSEL SKIPPR - PERSONALIZADOS CON FLECHAS */
     #bigSkippr .skippr-nav-container {
       position: absolute;
       bottom: 20px;
@@ -350,50 +363,44 @@
       z-index: 10;
     }
     
+    /* OCULTAMOS LOS PUNTOS/CIRCULOS */
     #bigSkippr .skippr-nav-element {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      margin: 0 5px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.3s ease;
+      display: none !important;
     }
     
-    #bigSkippr .skippr-nav-element.active {
-      background: var(--secondary-color);
-    }
-    
+    /* FLECHAS PERSONALIZADAS - REEMPLAZANDO LOS CIRCULOS */
     #bigSkippr .skippr-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       color: white;
-      font-size: 40px;
+      font-size: 50px;
       cursor: pointer;
       z-index: 10;
-      background: rgba(0,0,0,0.5);
-      width: 60px;
-      height: 60px;
+      background: rgba(0,0,0,0.6);
+      width: 70px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
       transition: all 0.3s ease;
+      border: 2px solid rgba(255,255,255,0.3);
+      font-weight: bold;
     }
     
     #bigSkippr .skippr-arrow:hover {
-      background: rgba(0,0,0,0.8);
-      transform: translateY(-50%) scale(1.1);
+      background: rgba(0,0,0,0.9);
+      transform: translateY(-50%) scale(1.15);
+      border-color: var(--secondary-color);
     }
     
     #bigSkippr .skippr-arrow.prev {
-      left: 20px;
+      left: 30px;
     }
     
     #bigSkippr .skippr-arrow.next {
-      right: 20px;
+      right: 30px;
     }
     
     /* CONTACT FORM */
@@ -457,11 +464,11 @@
       box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
     
-    /* FOOTER */
+    /* FOOTER - Color sólido como el header */
     footer {
-      background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
+      background: var(--primary-color); /* Mismo color que header */
       color: white;
-      padding: 40px;
+      padding: 50px 40px;
       text-align: center;
     }
     
@@ -481,22 +488,24 @@
     .social-icons a {
       text-decoration: none;
       transition: all 0.3s ease;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
     }
     
     .social-icons a:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.2);
+      transform: translateY(-5px) scale(1.1);
+      background: rgba(255,255,255,0.25);
+      border-color: var(--secondary-color);
     }
     
     .social-icons i {
-      font-size: 24px;
+      font-size: 28px;
       color: white;
       transition: color 0.3s ease;
     }
@@ -508,7 +517,7 @@
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       .logo {
-        height: 70px;
+        height: 90px;
       }
       
       nav ul {
@@ -516,21 +525,22 @@
       }
       
       .video-container {
-        width: 95%;
+        width: 92%;
       }
     }
     
     @media (max-width: 992px) {
       header {
         padding: 15px 30px;
+        height: 110px;
       }
       
       .logo {
-        height: 60px;
+        height: 80px;
       }
       
       section {
-        padding: 140px 40px 40px;
+        padding: 150px 40px 40px;
       }
       
       .personal-container {
@@ -540,23 +550,29 @@
       }
       
       .personal-photo {
-        width: 250px;
-        height: 250px;
+        width: 280px;
+        height: 280px;
       }
       
       #bigSkippr {
         height: 500px;
       }
+      
+      #bigSkippr .skippr-arrow {
+        width: 60px;
+        height: 60px;
+        font-size: 40px;
+      }
     }
     
     @media (max-width: 780px) {
       header {
-        height: 80px;
+        height: 100px;
         padding: 10px 20px;
       }
       
       .logo {
-        height: 50px;
+        height: 70px;
       }
       
       nav ul {
@@ -578,11 +594,11 @@
       }
       
       .video-container {
-        width: 98%;
+        width: 96%;
       }
       
       .carousel-container {
-        width: 90%;
+        width: 95%;
       }
       
       .carousel-item iframe {
@@ -591,6 +607,20 @@
       
       .contact-container {
         padding: 30px;
+      }
+      
+      #bigSkippr .skippr-arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 35px;
+      }
+      
+      #bigSkippr .skippr-arrow.prev {
+        left: 15px;
+      }
+      
+      #bigSkippr .skippr-arrow.next {
+        right: 15px;
       }
     }
     
@@ -605,10 +635,11 @@
       .logo-container {
         justify-content: center;
         width: 100%;
+        height: auto;
       }
       
       .logo {
-        height: 60px;
+        height: 70px;
         margin: 0;
       }
       
@@ -637,7 +668,7 @@
       }
       
       section {
-        padding: 150px 20px 30px;
+        padding: 170px 20px 30px; /* Aumentado por header más alto */
         min-height: auto;
       }
       
@@ -647,8 +678,8 @@
       }
       
       .personal-photo {
-        width: 200px;
-        height: 200px;
+        width: 220px;
+        height: 220px;
       }
       
       .personal-content h3 {
@@ -679,7 +710,7 @@
       }
       
       .carousel-container {
-        width: 95%;
+        width: 98%;
       }
       
       .carousel-item iframe {
@@ -705,7 +736,7 @@
       }
       
       footer {
-        padding: 30px 20px;
+        padding: 40px 20px;
       }
       
       .social-icons {
@@ -713,12 +744,12 @@
       }
       
       .social-icons a {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
       }
       
       .social-icons i {
-        font-size: 20px;
+        font-size: 22px;
       }
     }
   </style>
@@ -1027,14 +1058,14 @@ $(document).ready(function() {
     const target = $(this.getAttribute('href'));
     if (target.length) {
       $('html, body').stop().animate({
-        scrollTop: target.offset().top - 100
+        scrollTop: target.offset().top - 120 // Ajustado por header más alto
       }, 600);
     }
   });
   
   // Añadir clase activa al menú según scroll
   $(window).on('scroll', function() {
-    const scrollPos = $(window).scrollTop() + 120;
+    const scrollPos = $(window).scrollTop() + 140;
     
     $('nav ul li a').each(function() {
       const currLink = $(this);
