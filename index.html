@@ -34,13 +34,13 @@
       line-height: 1.6;
     }
     
-    /* HEADER - Manteniendo imagen de fondo */
+    /* HEADER */
     header {
       width: 100%;
       height: 100px;
       background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
       color: var(--primary-color);
-      padding: 10px 40px; /* Reducido padding para dar más espacio al logo */
+      padding: 20px 40px;
       position: fixed;
       top: 0;
       left: 0;
@@ -54,17 +54,14 @@
       flex: 1;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
-      height: 100%;
     }
     
     .logo {
-      height: 90px; /* Logo MÁS GRANDE (era 80px) */
+      height: 80px;
       width: auto;
-      max-width: none; /* Quitamos limitación */
+      max-width: 200px;
       object-fit: contain;
       transition: transform 0.3s ease;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Mejor visibilidad sobre fondo */
     }
     
     .logo:hover {
@@ -92,7 +89,6 @@
       padding: 8px 15px;
       border-radius: 4px;
       font-size: 0.95rem;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     
     nav ul li a:hover {
@@ -129,24 +125,21 @@
     
     #personal-info { 
       background: var(--bg-white); 
-      padding-bottom: 40px; /* REDUCIDO el padding inferior */
     }
     
     .personal-container {
       display: flex;
-      align-items: flex-start; /* Cambiado de center a flex-start */
+      align-items: center;
       gap: 60px;
-      min-height: 300px; /* Altura mínima para el contenedor */
     }
     
     .personal-photo {
       width: 300px;
-      height: 380px; /* AUMENTADA la altura para mostrar más foto */
+      height: 300px;
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      object-position: center top; /* Muestra la parte superior de la foto */
     }
     
     .personal-content h3 {
@@ -163,13 +156,13 @@
     #lightbox-gallery { 
       background: #e9e9e9;
       min-height: auto;
-      padding-top: 40px; /* AÑADIDO padding-top igual que abajo */
       padding-bottom: 40px;
     }
     
     #mistrabajos {
       background: var(--bg-white);
       padding-top: 50px;
+      position: relative; /* Añadido para posicionar flechas */
     }
     
     /* SOFTWARE GRID */
@@ -178,7 +171,6 @@
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 30px;
       margin-top: 40px;
-      margin-bottom: 40px; /* Mantenemos el mismo margin que ya tenía */
       text-align: center;
     }
     
@@ -209,7 +201,7 @@
       font-size: 1.1rem;
     }
     
-    /* LIGHTBOX - MODIFICADO para videos más anchos */
+    /* LIGHTBOX */
     .custom-lightbox {
       display: none;
       position: fixed;
@@ -252,8 +244,8 @@
     
     .carousel-container {
       position: relative;
-      width: 95%; /* AUMENTADO al 95% (era 80%) */
-      max-width: 1400px; /* AUMENTADO máximo */
+      width: 80%;
+      max-width: 1000px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -272,16 +264,14 @@
     
     .carousel-item iframe {
       width: 100%;
-      height: 550px; /* AUMENTADA la altura */
+      height: 500px;
       border: none;
-      border-radius: 8px;
     }
     
     .carousel-item img {
       width: 100%;
-      max-height: 650px; /* AUMENTADA la altura máxima */
+      max-height: 600px;
       object-fit: contain;
-      border-radius: 8px;
     }
     
     @keyframes fadeIn {
@@ -312,7 +302,7 @@
       transform: translateY(-2px);
     }
     
-    /* SKIPPR CAROUSEL - COMPLETAMENTE MODIFICADO CON FLECHAS */
+    /* SKIPPR CAROUSEL - MODIFICADO PARA FLECHAS EN EL CONTENEDOR */
     #bigSkippr {
       width: 100%;
       height: 600px;
@@ -330,20 +320,16 @@
       display: flex !important;
       justify-content: center;
       align-items: center;
-      background: transparent;
     }
     
-    /* CONTENEDOR PARA VIDEO */
+    /* CONTENEDOR PARA MANTENER PROPORCIÓN 16:9 */
     .video-container {
       width: 90%;
       max-width: 1200px;
       height: 0;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
       position: relative;
       background: #000;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     
     #bigSkippr .slide iframe {
@@ -355,13 +341,8 @@
       border: none;
     }
     
-    /* OCULTAMOS COMPLETAMENTE LOS PUNTOS/NAVEGACIÓN POR DEFECTO */
-    #bigSkippr .skippr-nav-container {
-      display: none !important;
-    }
-    
-    /* FLECHAS PERSONALIZADAS - REEMPLAZANDO LOS CIRCULOS */
-    .custom-skippr-arrows {
+    /* FLECHAS PERSONALIZADAS EN EL CONTENEDOR DE LA SECCIÓN */
+    #mistrabajos .custom-skippr-arrows {
       position: absolute;
       top: 0;
       left: 0;
@@ -371,9 +352,9 @@
       z-index: 10;
     }
     
-    .custom-skippr-arrow {
+    #mistrabajos .custom-skippr-arrow {
       position: absolute;
-      top: 50%;
+      top: 50%; /* Centrado verticalmente en el contenedor #mistrabajos */
       transform: translateY(-50%);
       color: white;
       font-size: 40px;
@@ -389,20 +370,51 @@
       transition: all 0.3s ease;
       border: 2px solid rgba(255,255,255,0.3);
       font-weight: bold;
+      z-index: 15;
     }
     
-    .custom-skippr-arrow:hover {
+    #mistrabajos .custom-skippr-arrow:hover {
       background: rgba(0,0,0,0.8);
-      transform: translateY(-50%) scale(1.3); /* CRECE con hover */
+      transform: translateY(-50%) scale(1.2);
       border-color: white;
     }
     
-    .custom-skippr-arrow.prev {
+    #mistrabajos .custom-skippr-arrow.prev {
       left: 20px;
     }
     
-    .custom-skippr-arrow.next {
+    #mistrabajos .custom-skippr-arrow.next {
       right: 20px;
+    }
+    
+    /* Controles originales de Skippr - OCULTADOS */
+    #bigSkippr .skippr-nav-container {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+    }
+    
+    #bigSkippr .skippr-nav-element {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    #bigSkippr .skippr-nav-element.active {
+      background: var(--secondary-color);
+    }
+    
+    /* FLECHAS ORIGINALES DE SKIPPR - OCULTADAS */
+    #bigSkippr .skippr-arrow {
+      display: none !important;
     }
     
     /* CONTACT FORM */
@@ -466,7 +478,7 @@
       box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
     
-    /* FOOTER - Manteniendo imagen de fondo */
+    /* FOOTER */
     footer {
       background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
       color: white;
@@ -478,7 +490,6 @@
       font-size: 1.1rem;
       margin-bottom: 25px;
       font-weight: 500;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     
     .social-icons {
@@ -498,7 +509,6 @@
       justify-content: center;
       border-radius: 50%;
       background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
     }
     
     .social-icons a:hover {
@@ -510,7 +520,6 @@
       font-size: 24px;
       color: white;
       transition: color 0.3s ease;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     
     .social-icons a:hover i {
@@ -520,7 +529,7 @@
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       .logo {
-        height: 80px;
+        height: 70px;
       }
       
       nav ul {
@@ -530,10 +539,6 @@
       .video-container {
         width: 95%;
       }
-      
-      .carousel-container {
-        width: 90%;
-      }
     }
     
     @media (max-width: 992px) {
@@ -542,7 +547,7 @@
       }
       
       .logo {
-        height: 70px;
+        height: 60px;
       }
       
       section {
@@ -556,15 +561,15 @@
       }
       
       .personal-photo {
-        width: 280px;
-        height: 350px; /* Mantenemos altura proporcional */
+        width: 250px;
+        height: 250px;
       }
       
       #bigSkippr {
         height: 500px;
       }
       
-      .custom-skippr-arrow {
+      #mistrabajos .custom-skippr-arrow {
         width: 50px;
         height: 50px;
         font-size: 35px;
@@ -578,7 +583,7 @@
       }
       
       .logo {
-        height: 60px;
+        height: 50px;
       }
       
       nav ul {
@@ -604,32 +609,28 @@
       }
       
       .carousel-container {
-        width: 95%;
+        width: 90%;
       }
       
       .carousel-item iframe {
         height: 400px;
       }
       
-      .carousel-item img {
-        max-height: 500px;
-      }
-      
       .contact-container {
         padding: 30px;
       }
       
-      .custom-skippr-arrow {
+      #mistrabajos .custom-skippr-arrow {
         width: 45px;
         height: 45px;
         font-size: 30px;
       }
       
-      .custom-skippr-arrow.prev {
+      #mistrabajos .custom-skippr-arrow.prev {
         left: 10px;
       }
       
-      .custom-skippr-arrow.next {
+      #mistrabajos .custom-skippr-arrow.next {
         right: 10px;
       }
     }
@@ -648,7 +649,7 @@
       }
       
       .logo {
-        height: 70px;
+        height: 60px;
         margin: 0;
       }
       
@@ -681,18 +682,14 @@
         min-height: auto;
       }
       
-      #personal-info {
-        padding-bottom: 30px;
-      }
-      
       section h2 {
         font-size: 1.8rem;
         margin-bottom: 30px;
       }
       
       .personal-photo {
-        width: 250px;
-        height: 320px;
+        width: 200px;
+        height: 200px;
       }
       
       .personal-content h3 {
@@ -708,22 +705,26 @@
         height: 300px;
       }
       
-      .custom-skippr-arrow {
+      #mistrabajos .custom-skippr-arrow {
         width: 40px;
         height: 40px;
         font-size: 25px;
       }
       
+      #mistrabajos .custom-skippr-arrow.prev {
+        left: 5px;
+      }
+      
+      #mistrabajos .custom-skippr-arrow.next {
+        right: 5px;
+      }
+      
       .carousel-container {
-        width: 98%;
+        width: 95%;
       }
       
       .carousel-item iframe {
         height: 300px;
-      }
-      
-      .carousel-item img {
-        max-height: 400px;
       }
       
       .carousel-controls {
@@ -897,7 +898,7 @@
       </div>
     </div>
   </div>
-  <!-- FLECHAS PERSONALIZADAS PARA SKIPPR -->
+  <!-- FLECHAS PERSONALIZADAS EN EL CONTENEDOR DE LA SECCIÓN -->
   <div class="custom-skippr-arrows">
     <div class="custom-skippr-arrow prev">‹</div>
     <div class="custom-skippr-arrow next">›</div>
@@ -1048,7 +1049,7 @@ $(document).ready(function() {
     }
   });
   
-  // Inicializar Skippr - CONFIGURACIÓN SIMPLIFICADA
+  // Inicializar Skippr - CONFIGURACIÓN MODIFICADA
   if ($("#bigSkippr").length) {
     $("#bigSkippr").skippr({
       transition: 'fade',
@@ -1056,20 +1057,21 @@ $(document).ready(function() {
       autoPlay: true,
       autoPlayDuration: 5000,
       navType: 'bubble',
-      arrows: false, // Desactivamos las flechas por defecto
+      arrows: false, // Desactivamos las flechas por defecto de Skippr
       arrowsAutoHide: false
     });
     
-    // Control personalizado de flechas para Skippr
+    // Obtener instancia de Skippr
     let skipprInstance = $("#bigSkippr").data('skippr');
     
-    $(".custom-skippr-arrow.next").on("click", function() {
+    // Control personalizado de flechas en el contenedor #mistrabajos
+    $("#mistrabajos .custom-skippr-arrow.next").on("click", function() {
       if (skipprInstance) {
         skipprInstance.next();
       }
     });
     
-    $(".custom-skippr-arrow.prev").on("click", function() {
+    $("#mistrabajos .custom-skippr-arrow.prev").on("click", function() {
       if (skipprInstance) {
         skipprInstance.prev();
       }
