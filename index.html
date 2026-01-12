@@ -8,9 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <!-- Reemplazamos la dependencia local de Skippr por CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skippr/1.2.0/skippr.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/skippr/1.2.0/skippr.min.js"></script>
+  <link rel="stylesheet" href="skippr-master/dist/skippr.css">
   <script src="https://kit.fontawesome.com/0bf72f6f28.js" crossorigin="anonymous"></script>
   
   <style>
@@ -40,7 +38,7 @@
     header {
       width: 100%;
       height: 100px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
       color: var(--primary-color);
       padding: 20px 40px;
       position: fixed;
@@ -64,9 +62,6 @@
       max-width: 200px;
       object-fit: contain;
       transition: transform 0.3s ease;
-      background: white;
-      padding: 10px;
-      border-radius: 8px;
     }
     
     .logo:hover {
@@ -145,7 +140,6 @@
       object-fit: cover;
       flex-shrink: 0;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      background: #f0f0f0;
     }
     
     .personal-content h3 {
@@ -168,7 +162,7 @@
     #mistrabajos {
       background: var(--bg-white);
       padding-top: 50px;
-      position: relative;
+      position: relative; /* Añadido para posicionar flechas */
     }
     
     /* SOFTWARE GRID */
@@ -199,9 +193,6 @@
       height: 80px;
       object-fit: contain;
       margin-bottom: 15px;
-      background: #f8f9fa;
-      padding: 10px;
-      border-radius: 10px;
     }
     
     .software-item p {
@@ -281,7 +272,6 @@
       width: 100%;
       max-height: 600px;
       object-fit: contain;
-      background: #000;
     }
     
     @keyframes fadeIn {
@@ -312,14 +302,14 @@
       transform: translateY(-2px);
     }
     
-    /* SKIPPR CAROUSEL - ARREGLADO PARA FLECHAS */
+    /* SKIPPR CAROUSEL - MODIFICADO PARA FLECHAS EN EL CONTENEDOR */
     #bigSkippr {
       width: 100%;
       height: 600px;
       position: relative;
       overflow: hidden;
       background: #000;
-      z-index: 1;
+      z-index: 1; /* Añadido para asegurar jerarquía */
     }
     
     #bigSkippr .slide {
@@ -338,7 +328,7 @@
       width: 90%;
       max-width: 1200px;
       height: 0;
-      padding-bottom: 56.25%;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
       position: relative;
       background: #000;
     }
@@ -352,7 +342,7 @@
       border: none;
     }
     
-    /* FLECHAS PERSONALIZADAS - MEJORADO Z-INDEX */
+    /* FLECHAS PERSONALIZADAS EN EL CONTENEDOR DE LA SECCIÓN - ARREGLADO */
     #mistrabajos .custom-skippr-arrows {
       position: absolute;
       top: 0;
@@ -360,7 +350,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 100;
+      z-index: 20; /* Aumentado para estar sobre el carrusel */
     }
     
     #mistrabajos .custom-skippr-arrow {
@@ -381,13 +371,13 @@
       transition: all 0.3s ease;
       border: 2px solid rgba(255,255,255,0.3);
       font-weight: bold;
-      z-index: 101;
+      z-index: 21; /* Aumentado para estar sobre las flechas contenedor */
     }
     
     #mistrabajos .custom-skippr-arrow:hover {
       background: rgba(0,0,0,0.8);
-      transform: translateY(-50%) scale(1.1);
-      border-color: var(--secondary-color);
+      transform: translateY(-50%) scale(1.2);
+      border-color: white;
     }
     
     #mistrabajos .custom-skippr-arrow.prev {
@@ -491,7 +481,7 @@
     
     /* FOOTER */
     footer {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: url(Imagenes/depositphotos_249365106-stock-photo-neon-background-template-electric-light.jpg) center/cover;
       color: white;
       padding: 40px;
       text-align: center;
@@ -779,10 +769,7 @@
 
 <header>
   <div class="logo-container">
-    <!-- Placeholder para logo -->
-    <div class="logo" style="display: flex; align-items: center; justify-content: center; color: #667eea; font-weight: bold; font-size: 1.5rem;">
-      Jesús Jiménez
-    </div>
+    <img class="logo" src="Imagenes/Logo/Logo.png" alt="Logo Jesús Jiménez">
   </div>
   <nav>
     <ul>
@@ -797,9 +784,7 @@
 <section id="personal-info">
   <h2>Información Personal</h2>
   <div class="personal-container">
-    <div class="personal-photo" style="display: flex; align-items: center; justify-content: center; color: #666; font-size: 1.2rem;">
-      Foto Personal
-    </div>
+    <img src="Imagenes/IMG_2254.JPG" alt="Foto personal" class="personal-photo">
     <div class="personal-content">
       <h3>Sobre mí</h3>
       <p>Muy buenas, soy Jesús Jiménez Muñoz, estudiante de Animación 2D y 3D, amante de la animación y la edición. Desde pequeño siempre he tenido una gran imaginación, y eso me ha llevado a querer crear proyectos que cuenten historias, que emocionen, y que exploren nuevos estilos.</p>
@@ -814,36 +799,32 @@
 
   <div class="softwares-grid">
     <div class="software-item" data-target="#lb-blender">
-      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); margin: 0 auto 15px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
-        B
-      </div>
+      <img src="Imagenes/blender.png" alt="Blender">
       <p>Blender</p>
     </div>
     <div class="software-item" data-target="#lb-premiere">
-      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); margin: 0 auto 15px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
-        Pr
-      </div>
+      <img src="Imagenes/premiere.avif" alt="Premiere">
       <p>Premiere</p>
     </div>
     <div class="software-item" data-target="#lb-photoshop">
-      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); margin: 0 auto 15px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
-        Ps
-      </div>
+      <img src="Imagenes/photoshop.avif" alt="Photoshop">
       <p>Photoshop</p>
     </div>
     <div class="software-item" data-target="#lb-after">
-      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); margin: 0 auto 15px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
-        P
-      </div>
+      <img src="Imagenes/personajes.png" alt="Personajes">
       <p>Personajes</p>
     </div>
   </div>
 
-  <!-- LIGHTBOXES simplificados para GitHub -->
+  <!-- LIGHTBOXES -->
   <div id="lb-blender" class="custom-lightbox">
     <span class="lightbox-close">×</span>
     <div class="carousel-container">
       <iframe class="carousel-item active" src="https://www.youtube.com/embed/KmiIL6iYKV4" title="Secuencia Arcane" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/QujwbdPqZKY" title="Lipsyng Arcane" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <img class="carousel-item" src="Imagenes/Material/Blender/Jiménez_Jesús_VistaGeneral.png" alt="Vista General">
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/hQ1WWAZ27ZA" title="Render Lupa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/Fbu4vj-MmoY" title="Modelo Zeff One Piece" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="carousel-controls">
       <button class="prev">← Anterior</button>
@@ -855,6 +836,9 @@
     <span class="lightbox-close">×</span>
     <div class="carousel-container">
       <iframe class="carousel-item active" src="https://www.youtube.com/embed/aXsbw_DxY9E" title="Tráiler Hasta el último hombre" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/Cys7CmePb_c" title="Montaje Creativo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/BPSs7BQsooU" title="Análisis Novia Cadáver" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/kjpahZbstLw" title="Música Montaje Definitivo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="carousel-controls">
       <button class="prev">← Anterior</button>
@@ -865,9 +849,10 @@
   <div id="lb-photoshop" class="custom-lightbox">
     <span class="lightbox-close">×</span>
     <div class="carousel-container">
-      <div class="carousel-item active" style="background: #000; color: white; height: 500px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-        Trabajos en Photoshop
-      </div>
+      <img class="carousel-item active" src="Imagenes/Material/Photoshop/Jiménez_Jesús_FogatayHumo.gif" alt="Fogatay Humo">
+      <img class="carousel-item" src="Imagenes/Material/Photoshop/Jiménez_Jesús_Acuarelas.jpg" alt="Acuarelas">
+      <img class="carousel-item" src="Imagenes/Material/Photoshop/Jiménez_Jesús_Explosión.gif" alt="Explosión">
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/S-759yVjo9o" title="Storyboard Spiderman" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="carousel-controls">
       <button class="prev">← Anterior</button>
@@ -878,9 +863,10 @@
   <div id="lb-after" class="custom-lightbox">
     <span class="lightbox-close">×</span>
     <div class="carousel-container">
-      <div class="carousel-item active" style="background: #000; color: white; height: 500px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-        Diseño de Personajes
-      </div>
+      <img class="carousel-item active" src="Imagenes/Material/Personajes/Jiménez_Jesús_Emociones.png" alt="Emociones">
+      <img class="carousel-item" src="Imagenes/Material/Personajes/Jiménez_Jesús_ColoresPersonaje.png" alt="Colores Personaje">
+      <iframe class="carousel-item" src="https://www.youtube.com/embed/C0YCF4OItYc" title="360 Arcane" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <img class="carousel-item" src="Imagenes/Material/Personajes/Jiménez_Jesús_PersonajeRigFoto.png" alt="Personaje Rig">
     </div>
     <div class="carousel-controls">
       <button class="prev">← Anterior</button>
@@ -913,7 +899,7 @@
       </div>
     </div>
   </div>
-  <!-- FLECHAS PERSONALIZADAS -->
+  <!-- FLECHAS PERSONALIZADAS EN EL CONTENEDOR DE LA SECCIÓN -->
   <div class="custom-skippr-arrows">
     <div class="custom-skippr-arrow prev">‹</div>
     <div class="custom-skippr-arrow next">›</div>
@@ -924,7 +910,7 @@
   <div class="contact-container">
     <h2>Contáctame</h2>
     
-    <form id="contact-form" action="https://formspree.io/f/mzzjvgvd" method="POST">
+    <form action="mailto:jjimmun885@g.educaand.es" method="post" enctype="text/plain">
       <div class="form-group">
         <label for="nombre">Nombre *</label>
         <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
@@ -932,7 +918,7 @@
       
       <div class="form-group">
         <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+        <input type="email" id="email" name="email" required placeholder="jjimmun885@g.educaand.es">
       </div>
       
       <div class="form-group">
@@ -957,24 +943,33 @@
     <a href="https://www.instagram.com/jeikkop_artist/" target="_blank" aria-label="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
-    <a href="https://www.linkedin.com/in/jesus-jimenez-munoz/" target="_blank" aria-label="LinkedIn">
+    <a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_nav-header-signin" target="_blank" aria-label="LinkedIn">
       <i class="fab fa-linkedin"></i>
     </a>
-    <a href="https://www.behance.net/" target="_blank" aria-label="Behance">
-      <i class="fab fa-behance"></i>
+    <a href="https://www.whakoom.com/" target="_blank" aria-label="Whakoom">
+      <i class="fa-solid fa-book-open"></i>
     </a>
   </div>
 </footer>
 
+<script src="skippr-master/dist/skippr.min.js"></script>
 <script>
 $(document).ready(function() {
-  // Variables globales
+  // Variables globales para control de lightbox
   let currentLightbox = null;
-  let skipprInstance = null;
+  let skipprInstance = null; // Variable global para la instancia de Skippr
+  
+  // Función para pausar todos los videos
+  function pauseAllVideos() {
+    $("video").each(function() {
+      this.pause();
+    });
+  }
   
   // Función para cerrar lightbox
   function closeLightbox() {
     $(".custom-lightbox").removeClass("active").hide();
+    pauseAllVideos();
     currentLightbox = null;
   }
   
@@ -986,6 +981,9 @@ $(document).ready(function() {
     $(target).find(".carousel-item").removeClass("active").hide();
     $(target).find(".carousel-item:first").addClass("active").show();
     currentLightbox = target;
+    
+    // Pausar videos si hay alguno activo
+    pauseAllVideos();
   });
   
   // Cerrar Lightbox
@@ -993,15 +991,19 @@ $(document).ready(function() {
   
   // Cerrar con ESC
   $(document).on("keyup", function(e) {
-    if (e.keyCode === 27) closeLightbox();
+    if (e.keyCode === 27) {
+      closeLightbox();
+    }
   });
   
-  // Cerrar al hacer clic fuera
+  // Cerrar al hacer clic fuera del contenido
   $(".custom-lightbox").on("click", function(e) {
-    if (e.target === this) closeLightbox();
+    if (e.target === this) {
+      closeLightbox();
+    }
   });
   
-  // Navegación del carrusel lightbox
+  // Navegación del carrusel
   function navigateCarousel(direction) {
     if (!currentLightbox) return;
     
@@ -1010,6 +1012,13 @@ $(document).ready(function() {
     const activeItem = box.find(".carousel-item.active");
     const currentIndex = items.index(activeItem);
     
+    // Pausar video actual
+    activeItem.find("iframe").each(function() {
+      const src = $(this).attr('src');
+      $(this).attr('src', src); // Reiniciar el iframe para pausar
+    });
+    
+    // Calcular nuevo índice
     let newIndex;
     if (direction === 'next') {
       newIndex = (currentIndex + 1) % items.length;
@@ -1017,67 +1026,100 @@ $(document).ready(function() {
       newIndex = (currentIndex - 1 + items.length) % items.length;
     }
     
+    // Actualizar carrusel
     activeItem.removeClass("active").hide();
     items.eq(newIndex).addClass("active").show();
   }
   
   // Eventos para botones del carrusel
-  $(".next").on("click", function() { navigateCarousel('next'); });
-  $(".prev").on("click", function() { navigateCarousel('prev'); });
-  
-  // Navegación con teclado para lightbox
-  $(document).on("keyup", function(e) {
-    if (!currentLightbox) return;
-    if (e.keyCode === 37) navigateCarousel('prev');
-    if (e.keyCode === 39) navigateCarousel('next');
+  $(".next").on("click", function() {
+    navigateCarousel('next');
   });
   
-  // INICIALIZAR SKIPPR - CORREGIDO
-  function initSkippr() {
+  $(".prev").on("click", function() {
+    navigateCarousel('prev');
+  });
+  
+  // Navegación con teclado
+  $(document).on("keyup", function(e) {
+    if (!currentLightbox) return;
+    
+    if (e.keyCode === 37) { // Flecha izquierda
+      navigateCarousel('prev');
+    } else if (e.keyCode === 39) { // Flecha derecha
+      navigateCarousel('next');
+    }
+  });
+  
+  // INICIALIZACIÓN DE SKIPPR - COMPLETAMENTE REESCRITA
+  function initSkipprCarousel() {
     if ($("#bigSkippr").length) {
-      // Limpiar cualquier instancia previa
-      if ($("#bigSkippr").data('skippr')) {
-        $("#bigSkippr").data('skippr', null);
+      // Primero, asegurarnos de que no hay una instancia previa
+      if ($("#bigSkippr").hasClass('skippr-ready')) {
+        $("#bigSkippr").removeClass('skippr-ready');
       }
       
-      // Inicializar Skippr con configuración mejorada
+      // Limpiar cualquier contenido interno que Skippr pueda haber añadido
+      $("#bigSkippr").find('.skippr-arrow').remove();
+      $("#bigSkippr").find('.skippr-nav-container').remove();
+      
+      // Inicializar Skippr con configuración correcta
       $("#bigSkippr").skippr({
         transition: 'fade',
         speed: 800,
-        autoPlay: false, // Desactivamos autoplay para mejor control
+        autoPlay: true,
         autoPlayDuration: 5000,
         navType: 'bubble',
-        arrows: false, // Desactivamos flechas nativas
-        arrowsAutoHide: false,
-        keyboardNavigation: true // Habilitar navegación con teclado
+        arrows: false, // Desactivamos las flechas por defecto de Skippr
+        arrowsAutoHide: false
       });
       
-      // Obtener instancia de Skippr
+      // Obtener y almacenar la instancia de Skippr
       skipprInstance = $("#bigSkippr").data('skippr');
       
-      console.log("Skippr inicializado:", skipprInstance);
+      // Marcar como listo
+      $("#bigSkippr").addClass('skippr-ready');
       
-      // Control personalizado de flechas - ARREGLADO
+      console.log("Skippr inicializado correctamente");
+      
+      // Configurar las flechas personalizadas - ARREGLADO
       $("#mistrabajos .custom-skippr-arrow.next").off('click').on("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Click en flecha next");
+        
+        console.log("Flecha siguiente clickeada");
+        
         if (skipprInstance && typeof skipprInstance.next === 'function') {
           skipprInstance.next();
+        } else {
+          // Fallback: intentar obtener la instancia nuevamente
+          skipprInstance = $("#bigSkippr").data('skippr');
+          if (skipprInstance && typeof skipprInstance.next === 'function') {
+            skipprInstance.next();
+          }
         }
       });
       
       $("#mistrabajos .custom-skippr-arrow.prev").off('click').on("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Click en flecha prev");
+        
+        console.log("Flecha anterior clickeada");
+        
         if (skipprInstance && typeof skipprInstance.prev === 'function') {
           skipprInstance.prev();
+        } else {
+          // Fallback: intentar obtener la instancia nuevamente
+          skipprInstance = $("#bigSkippr").data('skippr');
+          if (skipprInstance && typeof skipprInstance.prev === 'function') {
+            skipprInstance.prev();
+          }
         }
       });
       
-      // Navegación con teclado para Skippr
+      // Añadir navegación con teclado para el carrusel Skippr
       $(document).on("keyup", function(e) {
+        // Solo si estamos en la sección de trabajos
         if ($("#mistrabajos").is(":visible") && skipprInstance) {
           if (e.keyCode === 37) { // Flecha izquierda
             e.preventDefault();
@@ -1096,16 +1138,35 @@ $(document).ready(function() {
       // Forzar redibujado después de la carga
       setTimeout(function() {
         $(window).trigger('resize');
+        // Asegurarnos de que las flechas estén visibles
+        $("#mistrabajos .custom-skippr-arrow").css('visibility', 'visible');
       }, 300);
     }
   }
   
-  // Inicializar Skippr cuando el DOM esté listo
-  initSkippr();
+  // Inicializar el carrusel Skippr cuando el DOM esté listo
+  initSkipprCarousel();
   
-  // Re-inicializar Skippr si hay problemas
+  // Re-inicializar si hay problemas con la carga
   $(window).on('load', function() {
-    setTimeout(initSkippr, 500);
+    setTimeout(function() {
+      // Verificar si Skippr se inicializó correctamente
+      if (!skipprInstance) {
+        console.log("Reinicializando Skippr...");
+        initSkipprCarousel();
+      }
+    }, 1000);
+  });
+  
+  // Re-inicializar cuando la sección se hace visible (por si hay lazy loading)
+  $(window).on('scroll', function() {
+    const mistrabajosTop = $("#mistrabajos").offset().top;
+    const windowBottom = $(window).scrollTop() + $(window).height();
+    
+    // Si la sección de trabajos es visible y Skippr no está inicializado
+    if (windowBottom > mistrabajosTop && !skipprInstance) {
+      setTimeout(initSkipprCarousel, 500);
+    }
   });
   
   // Smooth scroll para enlaces internos
@@ -1119,32 +1180,19 @@ $(document).ready(function() {
     }
   });
   
-  // Formulario de contacto con Formspree
-  $('#contact-form').on('submit', function(e) {
-    e.preventDefault();
-    const form = $(this);
-    const submitBtn = form.find('.submit-btn');
-    const originalText = submitBtn.text();
+  // Añadir clase activa al menú según scroll
+  $(window).on('scroll', function() {
+    const scrollPos = $(window).scrollTop() + 120;
     
-    submitBtn.text('Enviando...').prop('disabled', true);
-    
-    $.ajax({
-      url: form.attr('action'),
-      method: 'POST',
-      data: form.serialize(),
-      dataType: 'json',
-      success: function() {
-        submitBtn.text('¡Enviado!').css('background', '#28a745');
-        form[0].reset();
-        setTimeout(() => {
-          submitBtn.text(originalText).prop('disabled', false).css('background', '');
-        }, 3000);
-      },
-      error: function() {
-        submitBtn.text('Error, intenta de nuevo').css('background', '#dc3545');
-        setTimeout(() => {
-          submitBtn.text(originalText).prop('disabled', false).css('background', '');
-        }, 3000);
+    $('nav ul li a').each(function() {
+      const currLink = $(this);
+      const refElement = $(currLink.attr("href"));
+      
+      if (refElement.length && 
+          refElement.position().top <= scrollPos && 
+          refElement.position().top + refElement.height() > scrollPos) {
+        $('nav ul li a').removeClass("active");
+        currLink.addClass("active");
       }
     });
   });
