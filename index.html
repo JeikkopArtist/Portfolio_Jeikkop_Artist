@@ -309,7 +309,6 @@
       position: relative;
       overflow: hidden;
       background: #000;
-      z-index: 1; /* Añadido para asegurar jerarquía */
     }
     
     #bigSkippr .slide {
@@ -342,7 +341,7 @@
       border: none;
     }
     
-    /* FLECHAS PERSONALIZADAS EN EL CONTENEDOR DE LA SECCIÓN - ARREGLADO */
+    /* FLECHAS PERSONALIZADAS EN EL CONTENEDOR DE LA SECCIÓN */
     #mistrabajos .custom-skippr-arrows {
       position: absolute;
       top: 0;
@@ -350,12 +349,12 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 20; /* Aumentado para estar sobre el carrusel */
+      z-index: 10;
     }
     
     #mistrabajos .custom-skippr-arrow {
       position: absolute;
-      top: 50%;
+      top: 50%; /* Centrado verticalmente en el contenedor #mistrabajos */
       transform: translateY(-50%);
       color: white;
       font-size: 40px;
@@ -371,7 +370,7 @@
       transition: all 0.3s ease;
       border: 2px solid rgba(255,255,255,0.3);
       font-weight: bold;
-      z-index: 21; /* Aumentado para estar sobre las flechas contenedor */
+      z-index: 15;
     }
     
     #mistrabajos .custom-skippr-arrow:hover {
@@ -957,7 +956,6 @@
 $(document).ready(function() {
   // Variables globales para control de lightbox
   let currentLightbox = null;
-  let skipprInstance = null; // Variable global para la instancia de Skippr
   
   // Función para pausar todos los videos
   function pauseAllVideos() {
@@ -1051,123 +1049,39 @@ $(document).ready(function() {
     }
   });
   
-  // INICIALIZACIÓN DE SKIPPR - COMPLETAMENTE REESCRITA
-  function initSkipprCarousel() {
-    if ($("#bigSkippr").length) {
-      // Primero, asegurarnos de que no hay una instancia previa
-      if ($("#bigSkippr").hasClass('skippr-ready')) {
-        $("#bigSkippr").removeClass('skippr-ready');
-      }
-      
-      // Limpiar cualquier contenido interno que Skippr pueda haber añadido
-      $("#bigSkippr").find('.skippr-arrow').remove();
-      $("#bigSkippr").find('.skippr-nav-container').remove();
-      
-      // Inicializar Skippr con configuración correcta
-      $("#bigSkippr").skippr({
-        transition: 'fade',
-        speed: 800,
-        autoPlay: true,
-        autoPlayDuration: 5000,
-        navType: 'bubble',
-        arrows: false, // Desactivamos las flechas por defecto de Skippr
-        arrowsAutoHide: false
-      });
-      
-      // Obtener y almacenar la instancia de Skippr
-      skipprInstance = $("#bigSkippr").data('skippr');
-      
-      // Marcar como listo
-      $("#bigSkippr").addClass('skippr-ready');
-      
-      console.log("Skippr inicializado correctamente");
-      
-      // Configurar las flechas personalizadas - ARREGLADO
-      $("#mistrabajos .custom-skippr-arrow.next").off('click').on("click", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        console.log("Flecha siguiente clickeada");
-        
-        if (skipprInstance && typeof skipprInstance.next === 'function') {
-          skipprInstance.next();
-        } else {
-          // Fallback: intentar obtener la instancia nuevamente
-          skipprInstance = $("#bigSkippr").data('skippr');
-          if (skipprInstance && typeof skipprInstance.next === 'function') {
-            skipprInstance.next();
-          }
-        }
-      });
-      
-      $("#mistrabajos .custom-skippr-arrow.prev").off('click').on("click", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        console.log("Flecha anterior clickeada");
-        
-        if (skipprInstance && typeof skipprInstance.prev === 'function') {
-          skipprInstance.prev();
-        } else {
-          // Fallback: intentar obtener la instancia nuevamente
-          skipprInstance = $("#bigSkippr").data('skippr');
-          if (skipprInstance && typeof skipprInstance.prev === 'function') {
-            skipprInstance.prev();
-          }
-        }
-      });
-      
-      // Añadir navegación con teclado para el carrusel Skippr
-      $(document).on("keyup", function(e) {
-        // Solo si estamos en la sección de trabajos
-        if ($("#mistrabajos").is(":visible") && skipprInstance) {
-          if (e.keyCode === 37) { // Flecha izquierda
-            e.preventDefault();
-            if (typeof skipprInstance.prev === 'function') {
-              skipprInstance.prev();
-            }
-          } else if (e.keyCode === 39) { // Flecha derecha
-            e.preventDefault();
-            if (typeof skipprInstance.next === 'function') {
-              skipprInstance.next();
-            }
-          }
-        }
-      });
-      
-      // Forzar redibujado después de la carga
-      setTimeout(function() {
-        $(window).trigger('resize');
-        // Asegurarnos de que las flechas estén visibles
-        $("#mistrabajos .custom-skippr-arrow").css('visibility', 'visible');
-      }, 300);
-    }
-  }
-  
-  // Inicializar el carrusel Skippr cuando el DOM esté listo
-  initSkipprCarousel();
-  
-  // Re-inicializar si hay problemas con la carga
-  $(window).on('load', function() {
-    setTimeout(function() {
-      // Verificar si Skippr se inicializó correctamente
-      if (!skipprInstance) {
-        console.log("Reinicializando Skippr...");
-        initSkipprCarousel();
-      }
-    }, 1000);
-  });
-  
-  // Re-inicializar cuando la sección se hace visible (por si hay lazy loading)
-  $(window).on('scroll', function() {
-    const mistrabajosTop = $("#mistrabajos").offset().top;
-    const windowBottom = $(window).scrollTop() + $(window).height();
+  // Inicializar Skippr - CONFIGURACIÓN MODIFICADA
+  if ($("#bigSkippr").length) {
+    $("#bigSkippr").skippr({
+      transition: 'fade',
+      speed: 800,
+      autoPlay: true,
+      autoPlayDuration: 5000,
+      navType: 'bubble',
+      arrows: false, // Desactivamos las flechas por defecto de Skippr
+      arrowsAutoHide: false
+    });
     
-    // Si la sección de trabajos es visible y Skippr no está inicializado
-    if (windowBottom > mistrabajosTop && !skipprInstance) {
-      setTimeout(initSkipprCarousel, 500);
-    }
-  });
+    // Obtener instancia de Skippr
+    let skipprInstance = $("#bigSkippr").data('skippr');
+    
+    // Control personalizado de flechas en el contenedor #mistrabajos
+    $("#mistrabajos .custom-skippr-arrow.next").on("click", function() {
+      if (skipprInstance) {
+        skipprInstance.next();
+      }
+    });
+    
+    $("#mistrabajos .custom-skippr-arrow.prev").on("click", function() {
+      if (skipprInstance) {
+        skipprInstance.prev();
+      }
+    });
+    
+    // Forzar redibujado
+    setTimeout(function() {
+      $(window).trigger('resize');
+    }, 100);
+  }
   
   // Smooth scroll para enlaces internos
   $('a[href^="#"]').on('click', function(e) {
