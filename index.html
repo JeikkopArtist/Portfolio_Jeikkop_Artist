@@ -162,7 +162,7 @@
     #mistrabajos {
       background: var(--bg-white);
       padding-top: 50px;
-      position: relative; /* Añadido para posicionar flechas */
+      position: relative;
     }
     
     /* SOFTWARE GRID */
@@ -309,6 +309,7 @@
       position: relative;
       overflow: hidden;
       background: #000;
+      z-index: 1;
     }
     
     #bigSkippr .slide {
@@ -349,17 +350,17 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 10;
+      z-index: 100 !important;
     }
     
     #mistrabajos .custom-skippr-arrow {
       position: absolute;
-      top: 50%; /* Centrado verticalmente en el contenedor #mistrabajos */
+      top: 50%;
       transform: translateY(-50%);
       color: white;
       font-size: 40px;
       cursor: pointer;
-      pointer-events: auto;
+      pointer-events: auto !important;
       background: rgba(0,0,0,0.5);
       width: 60px;
       height: 60px;
@@ -370,7 +371,7 @@
       transition: all 0.3s ease;
       border: 2px solid rgba(255,255,255,0.3);
       font-weight: bold;
-      z-index: 15;
+      z-index: 101 !important;
     }
     
     #mistrabajos .custom-skippr-arrow:hover {
@@ -956,6 +957,7 @@
 $(document).ready(function() {
   // Variables globales para control de lightbox
   let currentLightbox = null;
+  let skipprInstance = null; // Variable para almacenar la instancia de Skippr
   
   // Función para pausar todos los videos
   function pauseAllVideos() {
@@ -1051,36 +1053,75 @@ $(document).ready(function() {
   
   // Inicializar Skippr - CONFIGURACIÓN MODIFICADA
   if ($("#bigSkippr").length) {
+    // Primero, detener cualquier autoplay antes de inicializar
+    $("#bigSkippr .slide iframe").each(function() {
+      const src = $(this).attr('src');
+      $(this).attr('src', src.split('?')[0]); // Remover parámetros de autoplay
+    });
+    
+    // Inicializar Skippr
     $("#bigSkippr").skippr({
       transition: 'fade',
       speed: 800,
-      autoPlay: true,
+      autoPlay: false, // Desactivamos autoplay para control manual
       autoPlayDuration: 5000,
       navType: 'bubble',
       arrows: false, // Desactivamos las flechas por defecto de Skippr
       arrowsAutoHide: false
     });
     
-    // Obtener instancia de Skippr
-    let skipprInstance = $("#bigSkippr").data('skippr');
+    // Obtener y almacenar la instancia de Skippr
+    skipprInstance = $("#bigSkippr").data('skippr');
+    
+    // Función para pausar el video actual en el carrusel Skippr
+    function pauseCurrentSkipprVideo() {
+      const currentSlide = $("#bigSkippr .slide.active");
+      const iframe = currentSlide.find("iframe");
+      if (iframe.length) {
+        // Pausar el iframe actual
+        const src = iframe.attr('src');
+        iframe.attr('src', src.split('?')[0]); // Remover parámetros
+      }
+    }
     
     // Control personalizado de flechas en el contenedor #mistrabajos
     $("#mistrabajos .custom-skippr-arrow.next").on("click", function() {
       if (skipprInstance) {
-        skipprInstance.next();
+        pauseCurrentSkipprVideo(); // Pausar video actual
+        skipprInstance.next(); // Cambiar al siguiente
       }
     });
     
     $("#mistrabajos .custom-skippr-arrow.prev").on("click", function() {
       if (skipprInstance) {
-        skipprInstance.prev();
+        pauseCurrentSkipprVideo(); // Pausar video actual
+        skipprInstance.prev(); // Cambiar al anterior
       }
     });
     
-    // Forzar redibujado
+    // También puedes agregar navegación con teclado para el carrusel Skippr
+    $(document).on("keyup", function(e) {
+      if ($("#mistrabajos").is(":visible")) {
+        if (e.keyCode === 37) { // Flecha izquierda
+          if (skipprInstance) {
+            pauseCurrentSkipprVideo();
+            skipprInstance.prev();
+          }
+        } else if (e.keyCode === 39) { // Flecha derecha
+          if (skipprInstance) {
+            pauseCurrentSkipprVideo();
+            skipprInstance.next();
+          }
+        }
+      }
+    });
+    
+    // Forzar redibujado después de un tiempo
     setTimeout(function() {
       $(window).trigger('resize');
-    }, 100);
+      // Actualizar la instancia por si acaso
+      skipprInstance = $("#bigSkippr").data('skippr');
+    }, 300);
   }
   
   // Smooth scroll para enlaces internos
