@@ -1,0 +1,31 @@
+{
+  "name": "portfolio-jeikkop-artist",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio de Jesús Jiménez (Jeikkop Artist) — Animación 2D/3D",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@iconify-json/lucide": "^1.2.138",
+    "@iconify-json/simple-icons": "^1.2.98",
+    "astro": "^7.3.5",
+    "astro-icon": "^1.2.0",
+    "js-yaml": "^4.3.2",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/js-yaml": "^4.0.9",
+    "typescript": "^6.0.3"
+  }
+}

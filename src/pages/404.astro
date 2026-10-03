@@ -1,0 +1,40 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/utils';
+---
+
+<BaseLayout title="Página no encontrada" noindex>
+  <section class="not-found container">
+    <p class="not-found__code striped" aria-hidden="true">404</p>
+    <h1>Este fotograma no existe</h1>
+    <p>La página que buscas se ha quedado fuera del montaje final.</p>
+    <a href={withBase('/')} class="btn btn--accent">
+      <Icon name="lucide:arrow-right" aria-hidden="true" /> Volver al inicio
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    justify-items: center;
+    gap: 20px;
+    padding-block: clamp(80px, 14vw, 160px);
+    text-align: center;
+  }
+
+  .not-found__code {
+    font-size: clamp(6rem, 4rem + 12vw, 12rem);
+    line-height: 1;
+    --stripe-color: var(--accent);
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  p {
+    color: var(--ink-soft);
+  }
+</style>

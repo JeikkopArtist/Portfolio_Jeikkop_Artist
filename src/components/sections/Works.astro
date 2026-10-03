@@ -1,0 +1,109 @@
+---
+import { Icon } from 'astro-icon/components';
+import SectionHeading from '@/components/SectionHeading.astro';
+import YouTube from '@/components/YouTube.astro';
+import { site } from '@/data/site';
+import { getOrdered } from '@/lib/utils';
+
+const works = await getOrdered('trabajos');
+const featured = works.find((w) => w.data.featured) ?? works[0];
+const rest = works.filter((w) => w !== featured);
+const youtube = site.socials.find((s) => s.label === 'YouTube');
+---
+
+<section id="trabajos" class="section" aria-labelledby="trabajos-title">
+  <div class="container">
+    <SectionHeading index="04" kicker="Trabajos" title="Animación, montaje y 3D en movimiento" id="trabajos-title" />
+
+    <article class="featured" data-reveal>
+      <YouTube id={featured.data.youtubeId} title={featured.data.title} />
+      <div class="featured__info">
+        <span class="kicker">Destacado</span>
+        <h3>{featured.data.title}</h3>
+        {featured.data.tag && <span class="chip">{featured.data.tag}</span>}
+        {
+          youtube && (
+            <a href={youtube.href} class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+              <Icon name="simple-icons:youtube" aria-hidden="true" /> Ver el canal
+            </a>
+          )
+        }
+      </div>
+    </article>
+
+    <ul class="works" role="list">
+      {
+        rest.map(({ data }, i) => (
+          <li class="work" data-reveal style={`--reveal-delay: ${i % 3}`}>
+            <YouTube id={data.youtubeId} title={data.title} />
+            <div class="work__meta">
+              <h3>{data.title}</h3>
+              {data.tag && <span class="work__tag">{data.tag}</span>}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .featured {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    margin-bottom: clamp(40px, 6vw, 64px);
+    padding: clamp(12px, 1.5vw, 16px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .featured__info {
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+    padding: 8px clamp(8px, 2vw, 24px) 8px 0;
+  }
+
+  .featured__info h3 {
+    font-size: var(--step-2);
+  }
+
+  .works {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: clamp(28px, 3vw, 40px) 20px;
+  }
+
+  .work__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .work h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .work__tag {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 860px) {
+    .featured {
+      grid-template-columns: 1fr;
+    }
+
+    .featured__info {
+      padding: 0 8px 12px;
+    }
+  }
+</style>

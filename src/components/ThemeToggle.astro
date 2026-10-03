@@ -1,0 +1,69 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" data-theme-toggle>
+  <Icon name="lucide:sun" class="theme-toggle__sun" aria-hidden="true" />
+  <Icon name="lucide:moon" class="theme-toggle__moon" aria-hidden="true" />
+</button>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--ink);
+  }
+
+  .theme-toggle svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  /* Se muestra el icono del tema al que vas a cambiar */
+  .theme-toggle__sun {
+    display: none;
+  }
+
+  :global(:root[data-theme='dark']) .theme-toggle__sun {
+    display: block;
+  }
+
+  :global(:root[data-theme='dark']) .theme-toggle__moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .theme-toggle__sun {
+      display: block;
+    }
+
+    :global(:root:not([data-theme='light'])) .theme-toggle__moon {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]')!;
+  const root = document.documentElement;
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const isDark = () => root.dataset.theme === 'dark' || (!root.dataset.theme && media.matches);
+
+  button.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+  });
+</script>

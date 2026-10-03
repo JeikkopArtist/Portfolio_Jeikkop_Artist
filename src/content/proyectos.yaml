@@ -1,0 +1,21 @@
+# Proyecto destacado (Game Jam).
+
+- id: evil-city
+  title: Evil City
+  event: Game Jam · Enthariel Games
+  paragraphs:
+    - >-
+      La participación en la Game Jam fue una nueva experiencia, lo hicimos de
+      prácticas a modo de concurso, y aunque contamos con más días de los que tiene
+      una game jam de normal (10 días), fue un verdadero reto que sirvió para
+      mejorar, practicar y aprender.
+    - Aprendí a priorizar tareas, arreglar errores bajo presión, y a adaptar las ideas más locas.
+  learnings:
+    - Trabajo colaborativo en equipo
+    - Gestión eficiente del tiempo bajo presión
+    - Adaptación al cambio de ideas
+    - Programación en Unity
+  cover: ../assets/images/proyectos/evil-city.png
+  coverAlt: Portada del videojuego Evil City
+  url: https://jeikkop.itch.io/evil-city
+  linkLabel: Jugar en itch.io

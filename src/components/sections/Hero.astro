@@ -1,0 +1,313 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import avatar from '@/assets/images/perfil/avatar.png';
+import { site } from '@/data/site';
+
+const [roleMain, roleDims] = site.role.split(/ (?=\S+$)/); // "Estudiante de Animación" + "2D/3D"
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <span class="kicker" data-reveal>{site.name} · {site.alias} Artist</span>
+      <h1 id="hero-title" data-reveal style="--reveal-delay: 1">
+        {roleMain} <span class="hero__dims">{roleDims}</span>
+      </h1>
+      <p class="hero__intro" data-reveal style="--reveal-delay: 2">{site.hero.intro}</p>
+      <div class="hero__actions" data-reveal style="--reveal-delay: 3">
+        <a href="#galeria" class="btn btn--accent">
+          <Icon name="lucide:images" aria-hidden="true" /> Ver galería
+        </a>
+        <a href="#contacto" class="btn btn--ghost">
+          <Icon name="lucide:mail" aria-hidden="true" /> Contactar
+        </a>
+      </div>
+      <ul class="hero__socials" role="list" data-reveal style="--reveal-delay: 4">
+        {
+          site.socials.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}>
+                <Icon name={s.icon} aria-hidden="true" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="hero__art" data-reveal style="--reveal-delay: 2">
+      <div class="hero__portrait">
+        <Image
+          src={avatar}
+          alt={`Ilustración de ${site.name}`}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <ul class="hero__tools" role="list" aria-label="Herramientas">
+        {site.about.tools.map((tool, i) => <li style={`--i: ${i}`}>{tool}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      {
+        [0, 1].map(() => (
+          <ul role="list">
+            {site.hero.disciplines.map((d) => (
+              <li>{d}</li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: clamp(32px, 6vw, 72px);
+    overflow: hidden;
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: clamp(32px, 6vw, 80px);
+    min-height: min(calc(100dvh - var(--header-h) - 140px), 760px);
+    padding-bottom: clamp(48px, 7vw, 88px);
+  }
+
+  .hero__text {
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+  }
+
+  h1 {
+    font-size: var(--step-4);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  .hero__dims {
+    display: inline-block;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  .hero__intro {
+    max-width: 56ch;
+    color: var(--ink-soft);
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero__socials {
+    display: flex;
+    gap: 6px;
+  }
+
+  .hero__socials a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--muted);
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+
+  .hero__socials a:hover {
+    color: var(--ink);
+    background: var(--bg-alt);
+  }
+
+  .hero__socials svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Ilustración */
+  .hero__art {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 440px);
+  }
+
+  .hero__portrait {
+    position: relative;
+    aspect-ratio: 1;
+    border: 10px solid var(--brand);
+    border-radius: 50%;
+    /* La ilustración tiene fondo blanco: el círculo es blanco en ambos temas */
+    background: #fff;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 10px var(--bg),
+      0 0 0 11px var(--line),
+      var(--shadow-lg);
+  }
+
+  .hero__art::before {
+    content: '';
+    position: absolute;
+    inset: -8% -8% auto auto;
+    width: 46%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: repeating-linear-gradient(to bottom, var(--accent) 0 6px, transparent 6px 11px);
+    opacity: 0.55;
+  }
+
+  .hero__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    translate: 0 6%;
+    scale: 1.04;
+  }
+
+  .hero__tools {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__tools li {
+    position: absolute;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .hero__tools li:nth-child(1) {
+    top: 8%;
+    left: -6%;
+  }
+
+  .hero__tools li:nth-child(2) {
+    top: 22%;
+    right: -10%;
+  }
+
+  .hero__tools li:nth-child(3) {
+    bottom: 18%;
+    left: -12%;
+  }
+
+  .hero__tools li:nth-child(4) {
+    bottom: 4%;
+    right: -2%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__tools li {
+      animation: float 6s ease-in-out infinite;
+      animation-delay: calc(var(--i) * -1.5s);
+    }
+  }
+
+  @keyframes float {
+    50% {
+      translate: 0 -10px;
+    }
+  }
+
+  /* Cinta de disciplinas */
+  .marquee {
+    border-block: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--bg);
+    overflow: hidden;
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+  }
+
+  .marquee ul {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .marquee li {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 16px 0 16px 28px;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .marquee li::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .marquee__track {
+      animation: marquee 40s linear infinite;
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      translate: -50% 0;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .hero__art {
+      order: -1;
+      width: min(72vw, 320px);
+    }
+
+    .hero__tools li:nth-child(1) {
+      left: -14%;
+    }
+
+    .hero__tools li:nth-child(3) {
+      left: -16%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero__tools {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,207 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from '@/components/SectionHeading.astro';
+import YouTube from '@/components/YouTube.astro';
+import { getOrdered } from '@/lib/utils';
+
+const jobs = await getOrdered('experiencia');
+---
+
+<section id="experiencia" class="section section--alt" aria-labelledby="experiencia-title">
+  <div class="container">
+    <SectionHeading index="05" kicker="Experiencia" title="Proyectos con clientes reales" id="experiencia-title" />
+
+    <ol class="timeline" role="list">
+      {
+        jobs.map(({ data }) => (
+          <li class="job" data-reveal>
+            <div class="job__when">
+              <span class="job__year">{data.year}</span>
+              <span class="job__duration">{data.duration}</span>
+            </div>
+
+            <article class="job__card">
+              <div class="job__body">
+                <p class="job__company">{data.company}</p>
+                <h3>{data.role}</h3>
+                <p class="job__description">{data.description}</p>
+                {data.tasks.length > 0 && (
+                  <ul class="job__tasks" role="list">
+                    {data.tasks.map((task) => (
+                      <li class="chip">{task}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <div class="job__media">
+                {data.media.type === 'youtube' ? (
+                  <YouTube id={data.media.youtubeId} title={data.media.title} />
+                ) : (
+                  <div class:list={['job__image', `job__image--${data.media.fit}`]}>
+                    <Image src={data.media.image} alt={data.media.alt} widths={[400, 700]} sizes="(min-width: 960px) 460px, 100vw" />
+                  </div>
+                )}
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 28px;
+  }
+
+  /* Línea vertical de la línea temporal */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 112px;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .job {
+    position: relative;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .job::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 112px;
+    width: 13px;
+    height: 13px;
+    border: 3px solid var(--bg-alt);
+    border-radius: 50%;
+    background: var(--accent);
+    translate: -50% 0;
+  }
+
+  .job__when {
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    padding-top: 22px;
+    font-family: var(--font-mono);
+  }
+
+  .job__year {
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+
+  .job__duration {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .job__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(20px, 3vw, 36px);
+    align-items: center;
+    padding: clamp(20px, 2.5vw, 28px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .job__body {
+    display: grid;
+    gap: 10px;
+  }
+
+  .job__company {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  h3 {
+    font-size: var(--step-2);
+  }
+
+  .job__description {
+    color: var(--ink-soft);
+  }
+
+  .job__tasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .job__tasks .chip {
+    background: var(--bg);
+  }
+
+  .job__image {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-alt);
+  }
+
+  .job__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .job__image--contain {
+    padding: 8% 10%;
+    background: #fff;
+  }
+
+  .job__image--contain img {
+    object-fit: contain;
+  }
+
+  @media (max-width: 960px) {
+    .job__card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .timeline::before {
+      left: 6px;
+    }
+
+    .job {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding-left: 28px;
+    }
+
+    .job::before {
+      top: 6px;
+      left: 6px;
+    }
+
+    .job__when {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding-top: 0;
+    }
+  }
+</style>

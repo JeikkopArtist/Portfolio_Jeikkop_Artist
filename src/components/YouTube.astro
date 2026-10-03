@@ -1,0 +1,119 @@
+---
+// Vídeo de YouTube "ligero": muestra la miniatura y solo carga el reproductor
+// (~1 MB de JavaScript de YouTube) cuando el visitante pulsa play.
+// Sin JavaScript sigue funcionando como un enlace normal a YouTube.
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  id: string;
+  title: string;
+  eager?: boolean;
+}
+
+const { id, title, eager = false } = Astro.props;
+const watchUrl = `https://www.youtube.com/watch?v=${id}`;
+---
+
+<lite-youtube class="yt" data-id={id} data-title={title}>
+  <a href={watchUrl} class="yt__poster" target="_blank" rel="noopener noreferrer" aria-label={`Reproducir: ${title}`}>
+    <img
+      src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+      srcset={`https://i.ytimg.com/vi/${id}/mqdefault.jpg 320w, https://i.ytimg.com/vi/${id}/hqdefault.jpg 480w, https://i.ytimg.com/vi/${id}/sddefault.jpg 640w`}
+      sizes="(min-width: 960px) 600px, 100vw"
+      alt=""
+      width="480"
+      height="360"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+    <span class="yt__play" aria-hidden="true">
+      <Icon name="lucide:play" />
+    </span>
+  </a>
+</lite-youtube>
+
+<style>
+  .yt {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #000;
+  }
+
+  .yt__poster {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .yt__poster img {
+    width: 100%;
+    height: 100%;
+    /* Las miniaturas de YouTube son 4:3 con bandas negras: se recortan */
+    object-fit: cover;
+    transition:
+      scale 0.6s var(--ease),
+      filter 0.3s;
+  }
+
+  .yt__poster:hover img {
+    scale: 1.03;
+    filter: brightness(0.85);
+  }
+
+  .yt__play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--on-accent);
+    box-shadow: 0 10px 30px -8px rgb(0 0 0 / 0.5);
+    transition: scale 0.3s var(--ease);
+  }
+
+  .yt__poster:hover .yt__play {
+    scale: 1.1;
+  }
+
+  .yt__play svg {
+    width: 26px;
+    height: 26px;
+    margin-left: 3px;
+    fill: currentColor;
+  }
+
+  .yt :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
+
+<script>
+  class LiteYouTube extends HTMLElement {
+    connectedCallback() {
+      this.querySelector('a')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${this.dataset.id}?autoplay=1&rel=0`;
+        iframe.title = this.dataset.title ?? 'Vídeo de YouTube';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.allowFullscreen = true;
+        this.replaceChildren(iframe);
+        iframe.focus();
+      });
+    }
+  }
+
+  if (!customElements.get('lite-youtube')) customElements.define('lite-youtube', LiteYouTube);
+</script>

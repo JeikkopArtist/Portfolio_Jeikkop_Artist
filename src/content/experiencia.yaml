@@ -1,0 +1,65 @@
+# Experiencia profesional, de la más reciente a la más antigua.
+# media.type: youtube (con youtubeId) | image (con image y alt)
+
+- id: enefecto-modelado
+  role: Modelado 3D
+  company: Enefecto
+  year: 2025
+  duration: 1 semana
+  description: >-
+    Desarrollo y modelado de la mascota del programa "A simple vista", una mascota
+    que ya existía y teníamos que replicarla. Modelado, texturizado, riggeado y
+    animado desde cero.
+  tasks:
+    - Modelado de la mascota
+    - Texturizado
+    - Rig del modelo
+    - Animación de una ya existente
+  media:
+    type: youtube
+    youtubeId: OA-nadV1eHU
+    title: Mascota de "A simple vista" para Enefecto
+
+- id: mytto-edicion
+  role: Edición de vídeo
+  company: Mytto
+  year: 2025
+  duration: 1 semana
+  description: >-
+    Edición de un video para redes sociales de José Carlos Roldán, CEO de esta
+    agencia de comunicación y marketing (por tema de copyright no se puede publicar
+    el video).
+  media:
+    type: image
+    image: ../assets/images/experiencia/mytto.jpg
+    alt: Logotipo de Mytto
+    fit: contain
+
+- id: mytto-modelado
+  role: Modelado 3D
+  company: Mytto
+  year: 2025
+  duration: 1 semana
+  description: Modelado 3D de un chalet creado por la agencia Mytto.
+  tasks:
+    - Modelado del chalet
+    - Texturizado
+    - Decoración de entorno
+    - Renderizado
+  media:
+    type: youtube
+    youtubeId: WgQNm5tODgw
+    title: Chalet modelado para Mytto
+
+- id: enthariel-edicion
+  role: Edición de vídeo
+  company: Enthariel Games
+  year: 2025
+  duration: 2 semanas
+  description: >-
+    Spotlight de presentación de uno de los personajes del juego "Confinio";
+    todavía no está publicado y por derechos de autor no se puede subir (de momento).
+  media:
+    type: image
+    image: ../assets/images/experiencia/confinio.jpg
+    alt: Cabecera del juego Confinio

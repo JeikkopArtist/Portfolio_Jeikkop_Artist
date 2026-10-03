@@ -1,0 +1,135 @@
+---
+import { Icon } from 'astro-icon/components';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { getOrdered } from '@/lib/utils';
+
+const categories = await getOrdered('habilidades');
+---
+
+<section id="habilidades" class="section" aria-labelledby="habilidades-title">
+  <div class="container">
+    <SectionHeading index="02" kicker="Habilidades" title="Lo que hago y con qué" id="habilidades-title" />
+
+    <div class="skills">
+      {
+        categories.map(({ data }, i) => (
+          <article class="skill-card" data-reveal style={`--reveal-delay: ${i}`}>
+            <header>
+              <span class="skill-card__icon">
+                <Icon name={data.icon} aria-hidden="true" />
+              </span>
+              <h3>{data.title}</h3>
+            </header>
+            <ul role="list">
+              {data.skills.map((skill) => (
+                <li style={`--level: ${skill.level / 100}`}>
+                  <div class="skill__row">
+                    <span>{skill.name}</span>
+                    <span class="skill__value">{skill.level}%</span>
+                  </div>
+                  <div class="skill__bar" aria-hidden="true">
+                    <span />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 20px;
+  }
+
+  .skill-card {
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+  }
+
+  .skill-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    box-shadow: var(--shadow);
+  }
+
+  .skill-card header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .skill-card__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
+
+  .skill-card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  h3 {
+    font-size: var(--step-1);
+  }
+
+  .skill-card ul {
+    display: grid;
+    gap: 18px;
+  }
+
+  .skill__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .skill__value {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .skill__bar {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--bg-alt);
+    overflow: hidden;
+  }
+
+  .skill__bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--brand), var(--accent));
+    transform-origin: left;
+    scale: var(--level) 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .skill__bar span {
+      transition: scale 1.2s var(--ease) 0.2s;
+    }
+
+    :global(.js) .skill-card:not(:global(.is-visible)) .skill__bar span {
+      scale: 0 1;
+    }
+  }
+</style>

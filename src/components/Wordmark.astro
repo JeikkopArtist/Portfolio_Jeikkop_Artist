@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import avatar from '@/assets/images/perfil/avatar.png';
+import { site } from '@/data/site';
+
+interface Props {
+  size?: 'sm' | 'lg';
+}
+
+const { size = 'sm' } = Astro.props;
+---
+
+<span class:list={['wordmark', `wordmark--${size}`]}>
+  <span class="striped wordmark__name">{site.alias.toUpperCase()}</span>
+  <span class="wordmark__avatar" aria-hidden="true">
+    <Image src={avatar} alt="" width={size === 'lg' ? 96 : 40} densities={[1, 2]} />
+  </span>
+  <span class="striped wordmark__tag">artist</span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 1.15rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .wordmark--lg {
+    font-size: clamp(1.6rem, 1rem + 2.4vw, 2.6rem);
+  }
+
+  .wordmark__name,
+  .wordmark__tag {
+    padding-block: 0.08em;
+  }
+
+  .wordmark__tag {
+    font-weight: 500;
+    --stripe-color: var(--accent);
+  }
+
+  .wordmark__avatar {
+    display: grid;
+    place-items: center;
+    width: 1.9em;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 0.12em solid var(--brand);
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  @media (max-width: 420px) {
+    .wordmark--sm .wordmark__tag {
+      display: none;
+    }
+  }
+
+  .wordmark__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    translate: 0 8%;
+  }
+</style>

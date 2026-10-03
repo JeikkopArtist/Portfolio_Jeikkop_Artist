@@ -1,0 +1,248 @@
+---
+import { Icon } from 'astro-icon/components';
+import Wordmark from '@/components/Wordmark.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import { site } from '@/data/site';
+import { withBase } from '@/lib/utils';
+---
+
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a href={withBase('/')} class="site-header__brand" aria-label={`${site.name} — inicio`}>
+      <Wordmark />
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Principal" data-nav>
+      <ul role="list">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a href={withBase(`/#${item.id}`)} data-section-link={item.id}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <ThemeToggle />
+      <button
+        class="menu-btn"
+        type="button"
+        aria-controls="site-nav"
+        aria-expanded="false"
+        aria-label="Abrir menú"
+        data-menu-btn
+      >
+        <Icon name="lucide:menu" class="menu-btn__open" aria-hidden="true" />
+        <Icon name="lucide:x" class="menu-btn__close" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.3s var(--ease),
+      border-color 0.3s var(--ease);
+  }
+
+  .site-header[data-scrolled],
+  .site-header:has([aria-expanded='true']) {
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border-color: var(--line);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 100%;
+  }
+
+  .site-header__brand {
+    text-decoration: none;
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: 4px;
+  }
+
+  .site-nav a {
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+
+  .site-nav a:hover {
+    color: var(--ink);
+    background: var(--bg-alt);
+  }
+
+  .site-nav a[aria-current='true'] {
+    color: var(--ink);
+  }
+
+  .site-nav a[aria-current='true']::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    translate: -50% 0;
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .menu-btn {
+    display: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+  }
+
+  .menu-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-btn__close,
+  .menu-btn[aria-expanded='true'] .menu-btn__open {
+    display: none;
+  }
+
+  .menu-btn[aria-expanded='true'] .menu-btn__close {
+    display: block;
+  }
+
+  @media (max-width: 960px) {
+    .menu-btn {
+      display: grid;
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: var(--header-h) 0 auto 0;
+      padding: 12px var(--gutter) 28px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-lg);
+      visibility: hidden;
+      opacity: 0;
+      translate: 0 -12px;
+      transition:
+        opacity 0.25s var(--ease),
+        translate 0.25s var(--ease),
+        visibility 0s 0.25s;
+    }
+
+    .site-nav[data-open] {
+      visibility: visible;
+      opacity: 1;
+      translate: 0 0;
+      transition:
+        opacity 0.25s var(--ease),
+        translate 0.25s var(--ease);
+    }
+
+    .site-nav ul {
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .site-nav a {
+      padding: 14px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+
+    .site-nav a[aria-current='true']::after {
+      left: auto;
+      right: 16px;
+      top: 50%;
+      bottom: auto;
+      width: 8px;
+      height: 8px;
+      translate: 0 -50%;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const nav = document.querySelector<HTMLElement>('[data-nav]')!;
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-btn]')!;
+
+  // Fondo del header solo al hacer scroll
+  const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Menú móvil
+  const setMenu = (open: boolean) => {
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    nav.toggleAttribute('data-open', open);
+  };
+  menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setMenu(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      menuBtn.focus();
+    }
+  });
+
+  // Marca en el menú la sección que cruza el centro de la pantalla
+  // (ninguna mientras se ve el hero o una sección que no está en el menú).
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>('[data-section-link]')].map((a) => [a.dataset.sectionLink!, a]),
+  );
+  const sections = document.querySelectorAll<HTMLElement>('main > section');
+
+  if (links.size && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const active = entries.find((e) => e.isIntersecting);
+        if (!active) return;
+        links.forEach((a, id) => a.setAttribute('aria-current', String(id === active.target.id)));
+      },
+      { rootMargin: '-50% 0px -50% 0px' },
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+</script>

@@ -1,0 +1,41 @@
+# Trabajos en vídeo (YouTube). `youtubeId` es lo que va después de "watch?v=" en la URL.
+# `featured: true` lo muestra en grande al principio.
+
+- id: secuencia-arcane
+  title: Secuencia Arcane
+  youtubeId: KmiIL6iYKV4
+  featured: true
+
+- id: hasta-el-ultimo-hombre
+  title: Tráiler · Hasta el último hombre
+  youtubeId: aXsbw_DxY9E
+  tag: Edición
+
+- id: storyboard-spiderman
+  title: Storyboard · Spider-Man
+  youtubeId: S-759yVjo9o
+  tag: Storyboard
+
+- id: lampara-pixar
+  title: Lámpara Pixar · Presentación
+  youtubeId: 77LeBLk2HYo
+
+- id: montaje-musica
+  title: Música · Montaje definitivo
+  youtubeId: kjpahZbstLw
+  tag: Montaje
+
+- id: pedorreta-enefecto
+  title: Pedorreta · Enefecto 3D
+  youtubeId: OA-nadV1eHU
+  tag: Animación 3D
+
+- id: chalet-mytto
+  title: Chalet Mytto
+  youtubeId: WgQNm5tODgw
+  tag: Modelado 3D
+
+- id: casa-modelada
+  title: Casa modelada
+  youtubeId: bTCJSUtdzkM
+  tag: Modelado 3D

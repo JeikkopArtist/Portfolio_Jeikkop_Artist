@@ -1,0 +1,178 @@
+---
+import { Icon } from 'astro-icon/components';
+import Wordmark from '@/components/Wordmark.astro';
+import { site } from '@/data/site';
+import { withBase } from '@/lib/utils';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <Wordmark size="lg" />
+        <p>{site.footer.blurb}</p>
+        <ul class="site-footer__socials" role="list">
+          {
+            site.socials.map((s) => (
+              <li>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}>
+                  <Icon name={s.icon} aria-hidden="true" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <nav aria-label="Pie de página">
+        <h2>Enlaces</h2>
+        <ul role="list">
+          {
+            site.nav.map((item) => (
+              <li>
+                <a href={withBase(`/#${item.id}`)}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div>
+        <h2>Herramientas</h2>
+        <ul role="list">
+          {site.about.tools.map((tool) => <li>{tool}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>&copy; {year} {site.name}. Todos los derechos reservados.</p>
+      <a href="#contenido" class="site-footer__top">
+        Volver arriba <Icon name="lucide:arrow-up" aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(56px, 8vw, 88px) 28px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-alt);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .site-footer__brand {
+    display: grid;
+    justify-items: start;
+    gap: 20px;
+    max-width: 440px;
+  }
+
+  .site-footer__brand p {
+    color: var(--ink-soft);
+  }
+
+  .site-footer__socials {
+    display: flex;
+    gap: 8px;
+  }
+
+  .site-footer__socials a {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--ink-soft);
+    transition:
+      color 0.2s,
+      border-color 0.2s,
+      translate 0.2s var(--ease);
+  }
+
+  .site-footer__socials a:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+    translate: 0 -2px;
+  }
+
+  .site-footer__socials svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  h2 {
+    margin-bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .site-footer__grid ul:not(.site-footer__socials) {
+    display: grid;
+    gap: 10px;
+    color: var(--ink-soft);
+  }
+
+  .site-footer__grid a:not(.site-footer__socials a) {
+    text-decoration: none;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+  }
+
+  .site-footer__grid a:hover {
+    color: var(--ink);
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: clamp(40px, 6vw, 64px);
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .site-footer__top {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .site-footer__top:hover {
+    color: var(--ink);
+  }
+
+  .site-footer__top svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (max-width: 760px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

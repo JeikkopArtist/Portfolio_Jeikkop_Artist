@@ -1,0 +1,52 @@
+---
+interface Props {
+  index: string;
+  kicker: string;
+  title: string;
+  id?: string;
+  align?: 'start' | 'center';
+}
+
+const { index, kicker, title, id, align = 'start' } = Astro.props;
+---
+
+<header class:list={['section-heading', `section-heading--${align}`]} data-reveal>
+  <span class="kicker"><span class="section-heading__index">{index}</span> {kicker}</span>
+  <h2 id={id}>{title}</h2>
+  {
+    Astro.slots.has('default') && (
+      <p class="section-heading__intro">
+        <slot />
+      </p>
+    )
+  }
+</header>
+
+<style>
+  .section-heading {
+    display: grid;
+    gap: 14px;
+    max-width: 720px;
+    margin-bottom: clamp(36px, 5vw, 56px);
+  }
+
+  .section-heading--center {
+    margin-inline: auto;
+    text-align: center;
+    justify-items: center;
+  }
+
+  h2 {
+    font-size: var(--step-3);
+  }
+
+  .section-heading__index {
+    color: var(--muted);
+  }
+
+  .section-heading__intro {
+    color: var(--ink-soft);
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+</style>

@@ -1,0 +1,340 @@
+---
+import { Icon } from 'astro-icon/components';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { site } from '@/data/site';
+
+const { email, formEndpoint, subjects } = site.contact;
+---
+
+<section id="contacto" class="section" aria-labelledby="contacto-title">
+  <div class="container contact">
+    <div class="contact__intro">
+      <SectionHeading index="07" kicker="Contacto" title="¿Hablamos?" id="contacto-title">
+        Si te interesa mi estilo o tienes un proyecto en mente, escríbeme por el formulario o directamente a mi
+        correo.
+      </SectionHeading>
+
+      <div class="contact__email" data-reveal>
+        <a href={`mailto:${email}`} class="contact__email-link">
+          <Icon name="lucide:mail" aria-hidden="true" />
+          {email}
+        </a>
+        <button type="button" class="contact__copy" data-copy={email} aria-label="Copiar correo">
+          <Icon name="lucide:copy" class="contact__copy-icon" aria-hidden="true" />
+          <Icon name="lucide:check" class="contact__check-icon" aria-hidden="true" />
+        </button>
+      </div>
+
+      <ul class="contact__socials" role="list" data-reveal>
+        {
+          site.socials.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener noreferrer">
+                <Icon name={s.icon} aria-hidden="true" />
+                <span>{s.label}</span>
+                <Icon name="lucide:arrow-up-right" class="contact__arrow" aria-hidden="true" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <form class="contact__form" data-contact-form data-endpoint={formEndpoint} data-email={email} data-reveal novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Nombre</label>
+          <input id="name" name="name" type="text" autocomplete="name" required placeholder="Tu nombre" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required placeholder="tu@email.com" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="subject">Asunto</label>
+        <select id="subject" name="subject" required>
+          <option value="" disabled selected>Selecciona un asunto</option>
+          {subjects.map((s) => <option value={s.value}>{s.label}</option>)}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Hola, me gustaría hablar sobre..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--accent contact__submit">
+        <Icon name="lucide:send" aria-hidden="true" /> Enviar mensaje
+      </button>
+      <p class="contact__status" role="status" aria-live="polite" data-status></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(40px, 7vw, 96px);
+    align-items: start;
+  }
+
+  .contact__intro .section-heading {
+    margin-bottom: 32px;
+  }
+
+  .contact__email {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .contact__email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 0.9rem + 1vw, 1.5rem);
+    font-weight: 600;
+    text-decoration: none;
+    word-break: break-all;
+    background: linear-gradient(var(--accent), var(--accent)) left bottom / 0 2px no-repeat;
+    transition: background-size 0.3s var(--ease);
+  }
+
+  .contact__email-link:hover {
+    background-size: 100% 2px;
+  }
+
+  .contact__email-link svg {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    color: var(--accent);
+  }
+
+  .contact__copy {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--ink-soft);
+  }
+
+  .contact__copy svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .contact__check-icon,
+  .contact__copy[data-copied] .contact__copy-icon {
+    display: none;
+  }
+
+  .contact__copy[data-copied] .contact__check-icon {
+    display: block;
+    color: #1f9d55;
+  }
+
+  .contact__socials {
+    border-top: 1px solid var(--line);
+  }
+
+  .contact__socials a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      color 0.2s,
+      padding 0.3s var(--ease);
+  }
+
+  .contact__socials a:hover {
+    color: var(--accent-ink);
+    padding-left: 12px;
+  }
+
+  .contact__socials svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact__socials .contact__arrow {
+    margin-left: auto;
+    color: var(--muted);
+  }
+
+  /* Formulario */
+  .contact__form {
+    display: grid;
+    gap: 18px;
+    padding: clamp(22px, 3vw, 36px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+  }
+
+  .field {
+    display: grid;
+    gap: 8px;
+  }
+
+  label {
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    font-size: 1rem;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  [aria-invalid='true'] {
+    border-color: #d93a3a;
+  }
+
+  .contact__submit {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .contact__submit:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .contact__status {
+    min-height: 1.5em;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .contact__status[data-state='error'] {
+    color: #d93a3a;
+  }
+
+  @media (max-width: 860px) {
+    .contact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Copiar correo al portapapeles
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy!);
+        btn.setAttribute('data-copied', '');
+        btn.setAttribute('aria-label', 'Correo copiado');
+        setTimeout(() => {
+          btn.removeAttribute('data-copied');
+          btn.setAttribute('aria-label', 'Copiar correo');
+        }, 2000);
+      } catch {
+        window.location.href = `mailto:${btn.dataset.copy}`;
+      }
+    });
+  });
+
+  // Formulario: con endpoint (Formspree…) envía por fetch; si no, abre el cliente de correo.
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]')!;
+  const status = form.querySelector<HTMLElement>('[data-status]')!;
+  const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+  const setStatus = (text: string, state: 'ok' | 'error' | '' = '') => {
+    status.textContent = text;
+    status.dataset.state = state;
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const fields = [...form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[name]')];
+    fields.forEach((f) => f.setAttribute('aria-invalid', String(!f.checkValidity())));
+    const firstInvalid = fields.find((f) => !f.checkValidity());
+    if (firstInvalid) {
+      setStatus('Revisa los campos marcados: todos son obligatorios y el email debe ser válido.', 'error');
+      firstInvalid.focus();
+      return;
+    }
+
+    const data = new FormData(form);
+    const subjectSelect = form.querySelector<HTMLSelectElement>('#subject')!;
+    const subjectLabel = subjectSelect.selectedOptions[0]?.textContent ?? '';
+    const endpoint = form.dataset.endpoint;
+
+    if (!endpoint) {
+      const subject = `[Portfolio] ${subjectLabel} — ${data.get('name')}`;
+      const body = `${data.get('message')}\n\n—\n${data.get('name')}\n${data.get('email')}`;
+      window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setStatus('Se ha abierto tu aplicación de correo con el mensaje preparado. Solo falta pulsar enviar.', 'ok');
+      return;
+    }
+
+    submit.disabled = true;
+    setStatus('Enviando…');
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      setStatus('¡Gracias! Tu mensaje ha llegado. Te responderé pronto.', 'ok');
+    } catch {
+      setStatus(`No se ha podido enviar. Escríbeme directamente a ${form.dataset.email}.`, 'error');
+    } finally {
+      submit.disabled = false;
+    }
+  });
+
+  form.addEventListener('input', (e) => {
+    const field = e.target as HTMLInputElement;
+    if (field.getAttribute('aria-invalid') === 'true' && field.checkValidity()) field.setAttribute('aria-invalid', 'false');
+  });
+</script>

@@ -1,0 +1,91 @@
+# Galería — se muestra en el mismo orden que aparece aquí.
+# Para añadir una pieza: copia la imagen en src/assets/images/galeria/
+# (nombre sin tildes ni espacios) y añade un bloque nuevo.
+# category: 3d | 2d | personajes
+#
+# El mosaico se monta solo: las imágenes panorámicas ocupan 2×2 y las verticales 1×2.
+# Si al añadir piezas queda un hueco al final, prueba a cambiar el orden de alguna.
+
+- id: escenario-low-poly
+  title: Escenario Low Poly
+  category: 3d
+  tag: Blender
+  image: ../assets/images/galeria/escenario-low-poly.png
+  alt: Escenario low poly modelado en Blender
+
+- id: fogata-humo
+  title: Fogata y humo
+  category: 2d
+  tag: FX · Photoshop
+  image: ../assets/images/galeria/fogata-humo.gif
+  alt: Animación de efecto de fogata y humo
+
+- id: cuadrupedo-perro
+  title: Cuadrúpedo · Perro
+  category: 2d
+  tag: Animación · Photoshop
+  image: ../assets/images/galeria/cuadrupedo-perro.gif
+  alt: Animación del ciclo de un perro
+
+- id: zeff-rig
+  title: Zeff · Modelado 3D
+  category: personajes
+  tag: Blender
+  image: ../assets/images/galeria/zeff-rig.png
+  alt: Modelado 3D del personaje Zeff
+
+- id: colores-personaje
+  title: Biblia de personaje
+  category: personajes
+  tag: Diseño de personajes
+  image: ../assets/images/galeria/colores-personaje.png
+  alt: Biblia de personaje con su paleta de colores
+
+- id: emociones
+  title: Biblia de emociones
+  category: personajes
+  tag: Diseño de personajes
+  image: ../assets/images/galeria/emociones.png
+  alt: Hoja de expresiones y emociones del personaje
+
+- id: explosion
+  title: Explosión
+  category: 2d
+  tag: FX · Photoshop
+  image: ../assets/images/galeria/explosion.gif
+  alt: Animación de efecto de explosión
+
+- id: acuarelas
+  title: Colores con capas
+  category: 2d
+  tag: Ilustración · Photoshop
+  image: ../assets/images/galeria/acuarelas.jpg
+  alt: Ilustración coloreada por capas con estilo acuarela
+
+- id: vuelo-ave
+  title: Vuelo de ave
+  category: 2d
+  tag: Animación · Photoshop
+  image: ../assets/images/galeria/vuelo-ave.gif
+  alt: Animación del vuelo de un ave
+
+- id: modelo-arcane
+  title: Modelo Arcane
+  category: 3d
+  tag: Blender
+  image: ../assets/images/galeria/modelo-arcane.png
+  alt: Modelo 3D inspirado en Arcane
+
+- id: llama-simple
+  title: Llama
+  category: 2d
+  tag: FX · Photoshop
+  image: ../assets/images/galeria/llama-simple.gif
+  alt: Animación de efecto de llama
+
+- id: modelo-lupa
+  title: Modelo Lupa
+  category: 3d
+  tag: Blender
+  image: ../assets/images/galeria/modelo-lupa.png
+  alt: Modelo 3D de una lupa

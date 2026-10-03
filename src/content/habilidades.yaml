@@ -1,0 +1,29 @@
+# Habilidades por categoría. `level` es un porcentaje (0-100).
+# `icon` es un icono de https://lucide.dev (prefijo "lucide:").
+
+- id: animacion-3d
+  title: Animación 3D
+  icon: lucide:box
+  skills:
+    - { name: Blender, level: 80 }
+    - { name: Modelado 3D, level: 75 }
+    - { name: Texturizado, level: 65 }
+    - { name: Rigging, level: 60 }
+
+- id: edicion-video
+  title: Edición de vídeo
+  icon: lucide:clapperboard
+  skills:
+    - { name: Premiere Pro, level: 90 }
+    - { name: After Effects, level: 65 }
+    - { name: Montaje, level: 85 }
+    - { name: Corrección de color, level: 65 }
+
+- id: diseno
+  title: Diseño
+  icon: lucide:brush
+  skills:
+    - { name: Photoshop, level: 80 }
+    - { name: Diseño de personajes, level: 75 }
+    - { name: Concept Art, level: 65 }
+    - { name: Intercalado, level: 70 }
